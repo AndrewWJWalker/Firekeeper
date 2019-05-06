@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using FSG.MeshAnimator;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -17,7 +18,15 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
-        
+
+        enemyManager.initialised = true;
+        StartCoroutine(Spawn());
+
+    }
+
+    IEnumerator Spawn()
+    {
+
         for (int loop = 0; loop < count; loop++)
         {
             Vector3 position = transform.position;
@@ -34,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
             position.z += Random.Range(-z, z);
             if (position.z > 0)
             {
-                position.z += Random.Range(minRadius, minRadius*2);
+                position.z += Random.Range(minRadius, minRadius * 2);
             }
             if (position.z < 0)
             {
@@ -43,13 +52,16 @@ public class EnemySpawner : MonoBehaviour
             GameObject newEnemy = Instantiate(enemy, this.transform);
             position.y = newEnemy.transform.position.y;
             newEnemy.transform.position = position;
+
+
+
             enemyManager.enemies.Add(newEnemy);
-            enemyManager.agents.Add(newEnemy.GetComponent <NavMeshAgent>());
+            enemyManager.agents.Add(newEnemy.GetComponent<NavMeshAgent>());
+            yield return new WaitForEndOfFrame();
         }
-        enemyManager.initialised = true;
-
-
     }
+
+
 
     void Update()
     {
