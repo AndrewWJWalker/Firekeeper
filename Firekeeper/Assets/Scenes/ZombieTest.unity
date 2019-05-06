@@ -186,7 +186,7 @@ MonoBehaviour:
   x: 50
   z: 50
   minRadius: 5
-  count: 1000
+  count: 500
 --- !u!4 &259976881
 Transform:
   m_ObjectHideFlags: 0
@@ -761,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1425248849
 Light:
   m_ObjectHideFlags: 0
@@ -769,11 +769,11 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425248848}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.6839622, g: 0.8072941, b: 1, a: 1}
+  m_Intensity: 0.31
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -829,13 +829,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425248848}
-  m_LocalRotation: {x: 0.954296, y: -0.040042, z: 0.25570282, w: 0.14943881}
+  m_LocalRotation: {x: 0.960861, y: -0.026469896, z: 0.25746188, w: 0.09878701}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 162.2, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 168.26, y: -30, z: 0}
 --- !u!1001 &1522444522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1344,11 +1344,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028752416755075199, guid: c3513c12b6ce9f640bc9b66fa72c7a07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5074178004001458623, guid: c3513c12b6ce9f640bc9b66fa72c7a07,
         type: 3}
