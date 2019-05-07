@@ -41,7 +41,7 @@ public class ResourceHud : MonoBehaviour
                 _veryExpensiveAndRareMaterialAmountText.text = _currentResources[type].ToString();
                 break;
             default:
-                Debug.LogError("Resource Type is missing, added through code!");
+                Debug.LogError("Resource Type is missing, it should be added through code!");
                 break;
         }
         

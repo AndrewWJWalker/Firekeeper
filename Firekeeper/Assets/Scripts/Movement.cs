@@ -9,17 +9,6 @@ public class Movement : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {       
-
-        if (gameObject.GetComponent<Resource>() != null)
-        {
-            Debug.Log("Lets chop em trees");
-            _player.SetShouldGatherResource(true);
-        }
-        else
-        {
-            _player.SetShouldGatherResource(false);
-        }
-
         _player.Move(eventData.pointerCurrentRaycast.worldPosition); 
     }
 
