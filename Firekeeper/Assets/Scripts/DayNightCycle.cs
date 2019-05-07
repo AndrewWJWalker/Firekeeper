@@ -41,7 +41,8 @@ public class DayNightCycle : MonoBehaviour
         moonTransform = moon.transform;
         sunRotationStored = sunTransform.rotation;
         moonRotationStored = moonTransform.rotation;
-
+        sun.enabled = false;
+        moon.enabled = true;
     }
 
     void FixedUpdate()
