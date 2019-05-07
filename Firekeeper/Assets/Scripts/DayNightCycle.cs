@@ -9,6 +9,7 @@ public class DayNightCycle : MonoBehaviour
     public float nightLength = 3;
     public Light sun;
     public Light moon;
+    public float lightTransitionTime;
     public Light campFire;
     public float campFireMin;
     public float campFireMax;
@@ -43,6 +44,9 @@ public class DayNightCycle : MonoBehaviour
         moonRotationStored = moonTransform.rotation;
         sun.enabled = false;
         moon.enabled = true;
+        enemySpawner.BeginSpawn();
+        sunIntensity = sun.intensity;
+        moonIntensity = moon.intensity;
     }
 
     void FixedUpdate()
@@ -72,7 +76,10 @@ public class DayNightCycle : MonoBehaviour
                 sunTransform.rotation *= Quaternion.Euler( transform.right * (progress * 180));
                 //set the sundial
                 
-            
+                if (progress > 0.8)
+                {
+                    StartCoroutine(TurnDownSun(lightTransitionTime));
+                }
                 
             }
 
@@ -120,13 +127,13 @@ public class DayNightCycle : MonoBehaviour
     void Sunrise()
     {
         sun.enabled = true;
+        StartCoroutine(TurnUpSun(lightTransitionTime));
         moon.enabled = false;
 
         //turn down the campfire
         StartCoroutine(TurnDownCampfire(campFireBlendTime));
 
-        //kill all enemies
-        enemyManager.Exterminate();
+
     }
 
     IEnumerator TurnUpCampfire(float time)
@@ -154,4 +161,33 @@ public class DayNightCycle : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
+
+    IEnumerator TurnUpSun(float time)
+    {
+        float timePassed = 0;
+        while (timePassed < time)
+        {
+            timePassed += Time.fixedDeltaTime;
+            float factor = timePassed / time;
+            float luminance = Mathf.Lerp(0, sunIntensity, factor);
+            sun.intensity = luminance;
+            yield return new WaitForFixedUpdate();
+        }
+        //kill all enemies
+        enemyManager.Exterminate();
+    }
+
+    IEnumerator TurnDownSun(float time)
+    {
+        float timePassed = 0;
+        while (timePassed < time)
+        {
+            timePassed += Time.fixedDeltaTime;
+            float factor = timePassed / time;
+            float luminance = Mathf.Lerp(sunIntensity, 0, factor);
+            sun.intensity = luminance;
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
 }
