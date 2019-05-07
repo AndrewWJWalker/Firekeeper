@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Player player;
+    [SerializeField] private Player _player;
 
     public void OnPointerClick(PointerEventData eventData)
     {       
@@ -13,14 +13,14 @@ public class Movement : MonoBehaviour, IPointerClickHandler
         if (gameObject.GetComponent<Resource>() != null)
         {
             Debug.Log("Lets chop em trees");
-            player.SetShouldGatherResource(true);
+            _player.SetShouldGatherResource(true);
         }
         else
         {
-            player.SetShouldGatherResource(false);
+            _player.SetShouldGatherResource(false);
         }
 
-        player.Move(eventData.pointerCurrentRaycast.worldPosition); 
+        _player.Move(eventData.pointerCurrentRaycast.worldPosition); 
     }
 
 }
