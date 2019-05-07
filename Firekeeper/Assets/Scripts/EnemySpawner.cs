@@ -20,8 +20,13 @@ public class EnemySpawner : MonoBehaviour
     {
 
         enemyManager.initialised = true;
-        StartCoroutine(Spawn());
+       
 
+    }
+
+    public void BeginSpawn()
+    {
+        StartCoroutine(Spawn());
     }
 
     IEnumerator Spawn()

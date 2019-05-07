@@ -22,8 +22,19 @@ public class EnemyAI : MonoBehaviour
         
         foreach(NavMeshAgent agent in agents)
         {
-            agent.velocity = (Vector3.zero - agent.transform.position) * speed;
+            if (agent != null)
+            {
+                agent.velocity = (Vector3.zero - agent.transform.position) * speed;
+            }
         }
 
+    }
+
+    public void Exterminate()
+    {
+        foreach( GameObject enemy in enemies )
+        {
+            Destroy(enemy);
+        }
     }
 }
