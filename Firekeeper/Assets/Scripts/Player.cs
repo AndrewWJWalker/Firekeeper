@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private ResourceHud _resourceHud;
     [SerializeField] private PopUpController _popUpController;
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _moveTargetTolerance = 0.5f;
 
-    private NavMeshAgent _navMesh;
+    private NavMeshAgent _navMeshAgent;
 
     private bool _bShouldGatherResource;
     private bool _bShouldFixFence;
@@ -20,9 +22,13 @@ public class Player : MonoBehaviour
     private Fence _collidingFence;
     //private Build _collidingResource;
 
+    private bool moving = false;
+
+    
+
     private void Awake()
     {
-        _navMesh = gameObject.GetComponent<NavMeshAgent>();
+        _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
         if (_playerAnimator == null)
         {
@@ -42,7 +48,8 @@ public class Player : MonoBehaviour
 
     public void Move(Vector3 targetPosition)
     {
-        _navMesh.destination = targetPosition;
+        _navMeshAgent.destination = targetPosition;
+
 
         if (_popUpController == null)
         {
@@ -103,5 +110,42 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(resource.GetHarvestTime());
         _resourceHud.AddResources(resource.GetResourceType(), resource.GetResourcePoints());
         //_playerAnimator.SetBool("shouldGather", false);
+    }
+
+    private void FixedUpdate()
+    {
+        float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
+        Debug.Log(distance);
+        if (distance > _moveTargetTolerance)
+        {
+    
+                moving = true;
+            
+        } else
+        {
+            if (moving)
+            {
+                Move();
+            }
+            moving = false;
+        }
+        if (moving)
+        {
+            Move();
+            
+        }
+
+        _playerAnimator.SetBool("isRunning", moving);
+
+    }
+
+    void Move()
+    {
+        transform.LookAt(_navMeshAgent.steeringTarget);
+        Vector3 rot = transform.eulerAngles;
+        rot.x = 0;
+        rot.z = 0;
+        transform.eulerAngles = rot;
+        transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
     }
 }
