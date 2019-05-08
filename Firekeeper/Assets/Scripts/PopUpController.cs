@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PopUpController : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     [SerializeField] private Canvas _canvas;
 
     private GameObject _activeGameObject;
     private Ray ray;
 
-    public void InitiatePopUp(GameObject hud)
+    public void InitiatePopUp(GameObject hud, Fence fence)
     {
         var popUp = hud.GetComponent<PopUp>();
 
@@ -20,7 +19,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud);
+        InitiatePopUpOnMouseClick(hud, fence);
     }
 
     public void ClearPopUp()
@@ -28,11 +27,12 @@ public class PopUpController : MonoBehaviour
         Destroy(_activeGameObject);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud)
+    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence)
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
             if (_activeGameObject == null)
@@ -48,6 +48,9 @@ public class PopUpController : MonoBehaviour
                         Quaternion.identity, _canvas.transform) as GameObject;
 
                 _activeGameObject.transform.localRotation = Quaternion.identity;
+
+                var popUp = _activeGameObject.GetComponent<PopUp>();
+                popUp.SetFence(fence);
             }
         }
     }
