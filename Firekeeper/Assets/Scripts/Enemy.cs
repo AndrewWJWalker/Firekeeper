@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FSG.MeshAnimator;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int strength = 1;
     public float attackCooldown = 3;
     public float attackRange = 0.5f;
+    [HideInInspector] public NavMeshAgent agent;
     FSG.MeshAnimator.MeshAnimator animator;
 
     Health targetHealth;
@@ -19,6 +21,10 @@ public class Enemy : MonoBehaviour
 
     public void StartDeath()
     {
+        if (agent != null)
+        {
+            Destroy(agent);
+        }
         StartCoroutine(DeathAnimation());
         alive = false;
     }
@@ -26,8 +32,21 @@ public class Enemy : MonoBehaviour
     IEnumerator DeathAnimation()
     {
         animator.Play(1);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(SinkIntoGround());
+        yield return new WaitForSeconds(5);
         Die();
+    }
+
+    IEnumerator SinkIntoGround()
+    {
+        bool doing = true;
+        while (doing)
+        {
+            transform.position = transform.position + Vector3.down * 0.01f;
+           // Debug.Log("Sinking dead dude");
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     void Die()
@@ -50,10 +69,11 @@ public class Enemy : MonoBehaviour
     public void AttackHit()
     {
         animator.Play(2);
-        Debug.Log("doin a hit");
+      //  Debug.Log("doin a hit");
         targetHealth.DealDamage(strength);
         canAttack = false;
         StartCoroutine(AttackCooldown());
+        StartCoroutine(AttackAnimToIdle());
     }
 
     IEnumerator AttackAnimToIdle()
