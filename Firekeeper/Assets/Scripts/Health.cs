@@ -10,13 +10,13 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _healthBarPrefab;
     [SerializeField] private Transform _healthBarSpawnPoint;
-    private int _maxHealth;
+    public int maxHealth;
     private Slider healthSlider;
     private GameObject healthBar;
 
     private void Start()
     {
-        _maxHealth = _healthPoints;
+        maxHealth = _healthPoints;
 
         healthBar = Instantiate(_healthBarPrefab, _canvas.transform);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(_healthBarSpawnPoint.position);
@@ -30,25 +30,11 @@ public class Health : MonoBehaviour
         UpdateHealthBar();
     }
 
-    [SerializeField] public int maxHealth;
-    //public int maxHealth { get; private set; }
-
-    //private void Start()
-    //{
-    //    maxHealth = _healthPoints;
-    //}
-
-    public void RestoreHealth()
-    {
-        _healthPoints = maxHealth;
-    }
-
     public void DealDamage(int damage)
     {
         _healthPoints -= damage;
 
-        if (_healthPoints <= 0)
-        {
+        if (_healthPoints <= 0)        {
             this.gameObject.active = false;
             healthBar.active = false;
         }
@@ -58,9 +44,9 @@ public class Health : MonoBehaviour
     public void Heal(int heal)
     {
         _healthPoints += heal;
-        if (_healthPoints > _maxHealth)
+        if (_healthPoints > maxHealth)
         {
-            _healthPoints = _maxHealth;
+            _healthPoints = maxHealth;
         }
         UpdateHealthBar();
     }
@@ -77,7 +63,7 @@ public class Health : MonoBehaviour
 
     public float GetHealthPercentage()
     {
-        float p = (float)_healthPoints / (float)_maxHealth;
+        float p = (float)_healthPoints / (float)maxHealth;
         Debug.Log(this.gameObject.name + " health : " + p);
 
         return p;
