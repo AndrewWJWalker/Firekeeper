@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    public int strength = 1;
 
     public void Die()
     {
@@ -15,9 +16,10 @@ public class Enemy : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         //check object
-        if (collision.collider.gameObject.CompareTag("Breakable"))
+        Health health = collision.collider.gameObject.GetComponent<Health>();
+        if (health != null)
         {
-
+            health.DealDamage(strength);
         }
     }
 
