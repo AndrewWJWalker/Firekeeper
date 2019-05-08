@@ -44,6 +44,11 @@ public class Player : MonoBehaviour
     {
         _navMesh.destination = targetPosition;
 
+        if (_popUpController == null)
+        {
+            Debug.LogError("Pop Up controller missing");
+            return;
+        }
         _popUpController.ClearPopUp();
     }
 
@@ -72,7 +77,7 @@ public class Player : MonoBehaviour
         {
             if (_bShouldFixFence)
             {
-            //StartCoroutine(FixFence(fence));
+            //StartCoroutine(ButtonPressed(fence));
             }
         }
         //else if (base != null)
@@ -81,7 +86,7 @@ public class Player : MonoBehaviour
 
         //    if (_bShouldBuldFence)
         //    {
-        //        StartCoroutine(FixFence(base));
+        //        StartCoroutine(ButtonPressed(base));
         //    }
         //}
     }
