@@ -16,15 +16,18 @@ public class PopUp : MonoBehaviour
     [SerializeField] private PopUpType _type;
 
     private Fence _fence;
-    private Button btn;
+    private Button _button;
+    private Text _text;
 
 
     private void Start()
     {
-        btn = gameObject.GetComponentInChildren<Button>();
+        _button = gameObject.GetComponentInChildren<Button>();
 
-        btn.onClick.AddListener(PopUpButtonClicked);
-    }   
+        _button.onClick.AddListener(PopUpButtonClicked);
+
+        _text = gameObject.GetComponentInChildren<Text>();
+    }
 
     public PopUpType GetPoPopUpType()
     {
@@ -34,6 +37,11 @@ public class PopUp : MonoBehaviour
     public void SetFence(Fence fence)
     {
         _fence = fence;
+    }
+
+    public void SetPopUpAmount(int amount)
+    {
+        gameObject.GetComponentInChildren<Text>().text = amount.ToString();
     }
 
     private void PopUpButtonClicked()

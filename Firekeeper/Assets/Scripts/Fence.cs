@@ -6,17 +6,36 @@ using UnityEngine.EventSystems;
 
 public class Fence : MonoBehaviour, IPointerClickHandler
 {
-    //[SerializeField] private Player _player;
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
+
+    private Health _health;
+    private Resource _resource;
 
     private bool _playerReady;
     private bool _buttonPressed;
 
+    private void Start()
+    {
+        _health = gameObject.GetComponent<Health>();
+
+        if (_health == null)
+        {
+            Debug.LogError("Attach Health script");
+        }
+
+        _resource = gameObject.GetComponent<Resource>();
+
+        if (_health == null)
+        {
+            Debug.LogError("Attach Resource script");
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        //_player.SetShouldFixFence(true);
         _buttonPressed = false;
+       
 
         _controller.InitiatePopUp(_popUp, this);  
     }
@@ -29,7 +48,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
             if (_buttonPressed)
             {
-                Debug.Log("FIX TRIGGER LAST");
+                FixFence();
             }
         }
     }
@@ -48,7 +67,34 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
         if (_playerReady)
         {
-            Debug.Log("FIX BUTTON LAST");
+            FixFence();
         }
+    }
+
+    public bool IsFenceFixable()
+    {
+        return (_health.maxHealth > _health.GetCurrentHealthPoints());
+    }
+
+    private void FixFence()
+    {
+
+        var resourceCost = GetFenceFixCost();
+
+        _resource.resourceCost = resourceCost;
+
+        _resource.PayResources(ResourceType.Wood, this);
+    }
+
+    public int GetFenceFixCost()
+    {
+        var resourceCost = _health.maxHealth - _health.GetCurrentHealthPoints();
+        return resourceCost *= 5;
+    }
+
+    public void RestoreFenceHealth()
+    {
+        _health.RestoreHealth();
+        _controller.ClearPopUp();
     }
 }

@@ -6,7 +6,7 @@ public class PopUpController : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
 
-    private GameObject _activeGameObject;
+    private GameObject _activePopUp;
     private Ray ray;
 
     public void InitiatePopUp(GameObject hud, Fence fence)
@@ -24,7 +24,7 @@ public class PopUpController : MonoBehaviour
 
     public void ClearPopUp()
     {
-        Destroy(_activeGameObject);
+        Destroy(_activePopUp);
     }
 
     private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence)
@@ -35,7 +35,7 @@ public class PopUpController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (_activeGameObject == null)
+            if (_activePopUp == null && fence.IsFenceFixable())
             {
                 var screenSpaceCord = Camera.main.WorldToScreenPoint(hit.point);
                 var canvasRectTransform = _canvas.GetComponent<RectTransform>();
@@ -44,13 +44,14 @@ public class PopUpController : MonoBehaviour
                 RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
                     Camera.main, out SpawnPosition);
 
-                _activeGameObject = Instantiate(hud, SpawnPosition,
+                _activePopUp = Instantiate(hud, SpawnPosition,
                         Quaternion.identity, _canvas.transform) as GameObject;
 
-                _activeGameObject.transform.localRotation = Quaternion.identity;
+                _activePopUp.transform.localRotation = Quaternion.identity;
 
-                var popUp = _activeGameObject.GetComponent<PopUp>();
+                var popUp = _activePopUp.GetComponent<PopUp>();
                 popUp.SetFence(fence);
+                popUp.SetPopUpAmount(fence.GetFenceFixCost());
             }
         }
     }
