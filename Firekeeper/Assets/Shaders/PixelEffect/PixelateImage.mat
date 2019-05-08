@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PixelateImage
-  m_Shader: {fileID: 4800000, guid: bb7ddf8c477d0a64f87ce6ea68805741, type: 3}
+  m_Shader: {fileID: 4800000, guid: f46d155b4c8fee14e859fe6c25dd3e8b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -47,6 +47,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LUT:
+        m_Texture: {fileID: 2800000, guid: 3cbb35321c765f640b1e369760c677f5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: fb33da2b388e3b24a8c66d4fcf175a25, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -80,6 +84,7 @@ Material:
     - _GlossyReflections: 1
     - _Green: 8
     - _Height: 2
+    - _LUTAmount: 0.355
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

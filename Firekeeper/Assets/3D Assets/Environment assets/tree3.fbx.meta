@@ -3,7 +3,12 @@ guid: 5d2567d5b5b3ed34da8f797f666e8886
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tree_blue
+    second: {fileID: 2100000, guid: bd5e4201e23f9174e847a7902aab7b06, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -59,8 +64,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
