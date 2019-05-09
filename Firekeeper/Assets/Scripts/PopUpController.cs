@@ -9,15 +9,31 @@ public class PopUpController : MonoBehaviour
     private GameObject _activePopUp;
     private Ray ray;
 
+    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
+    {
+        Tree tree = new Tree();
+
+        InitiatePopUp(hud, fence, type, myBase, tree);
+    }
+
+    public void InitiatePopUp(GameObject hud, Tree tree, PopUp.PopUpType type)
+    {
+        Base myBase = new Base();
+        Fence fence = new Fence();
+
+        InitiatePopUp(hud, fence, type, myBase, tree);
+    }
+
     public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type)
     {
         Base myBase = new Base();
-
-        InitiatePopUp(hud, fence, type, myBase);
+        Tree tree = new Tree();
+        
+        InitiatePopUp(hud, fence, type, myBase, tree);
     }
 
 
-    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
+    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase, Tree tree)
     {
         var popUp = hud.GetComponent<PopUp>();
 
@@ -27,7 +43,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud, fence, type, myBase);
+        InitiatePopUpOnMouseClick(hud, fence, type, myBase, tree);
     }
 
     public void ClearPopUp()
@@ -35,7 +51,7 @@ public class PopUpController : MonoBehaviour
         Destroy(_activePopUp);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
+    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase, Tree tree)
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -64,6 +80,14 @@ public class PopUpController : MonoBehaviour
 
                     popUp.SetFence(fence);
                     popUp.SetBase(myBase);
+                }
+                else if (type == PopUp.PopUpType.Collect)
+                {
+                    PositionPopUp(hud, hit);
+
+                    var popUp = _activePopUp.GetComponent<PopUp>();
+
+                    popUp.SetTree(tree);
                 }
 
             }

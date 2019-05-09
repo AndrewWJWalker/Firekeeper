@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320565119565590
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320565183850706
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320565220901630
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320566046270199
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320566344753001
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 0}
-  _popUp: {fileID: 2866452973844361578, guid: 85bca899eaeaca1418daa5420cde33c6, type: 3}
+  _popUp: {fileID: 5168414483228113851, guid: 4e28dc26133268e46985bda72696a02e, type: 3}
   _fencePrefab: {fileID: 0}
   _fenceBuildCost: 0
 --- !u!54 &8042320566433579801

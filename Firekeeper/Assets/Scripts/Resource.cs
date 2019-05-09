@@ -21,6 +21,7 @@ public class Resource : MonoBehaviour
             Debug.LogError("attatch ResourceHud prefab");
         }
     }
+
     public int GetResourcePoints()
     {
         return _resourceData.resourcePoints;
@@ -51,7 +52,7 @@ public class Resource : MonoBehaviour
         }
     }
 
-    public void PayResourcesForBuild(ResourceType type, GameObject fence, GameObject myBase)
+    public bool PayResourcesForBuild(ResourceType type, GameObject fence, GameObject myBase)
     {
         var resourceAmount = _resourceHud.GetResourcesAmount(type);
 
@@ -63,6 +64,19 @@ public class Resource : MonoBehaviour
 
             fence.SetActive(true);
             myBase.SetActive(false);
+
+            return true;
         }
+
+        return false;
+    }
+
+    public void GainResourcesFromHarvest(ResourceType type, int gainingAmount, GameObject tree)
+    {
+        _resourceHud.AddResources(type, gainingAmount);
+
+        //TODO Harvest Animation
+
+        tree.SetActive(false);
     }
 }
