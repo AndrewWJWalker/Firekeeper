@@ -10,18 +10,28 @@ public class AudioRandomOffset : MonoBehaviour
     public float offsetMax;
     public float delayBetween = 4f;
     public float pitchRange = 0.4f;
+    public float deleteAmount = 0.5f;
     bool canPlay = true;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
-        audio.Stop();
+        float chance = Random.Range(0f, 1f);
+        if (chance > deleteAmount) {
+            Destroy(audio);
+            Destroy(this);
+        }
+        else
+        {
 
-        float pitch = 1 + Random.Range(-pitchRange, pitchRange);
-        audio.pitch = pitch;
+            audio = GetComponent<AudioSource>();
+            audio.Stop();
 
-        float delay = Random.Range(0, offsetMax);
-        StartCoroutine(Delay(delay));
+            float pitch = 1 + Random.Range(-pitchRange, pitchRange);
+            audio.pitch = pitch;
+
+            float delay = Random.Range(0, offsetMax);
+            StartCoroutine(Delay(delay));
+        }
     }
 
 
