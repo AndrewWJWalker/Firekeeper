@@ -18,6 +18,7 @@ public class PopUp : MonoBehaviour
     private Fence _fence;
     private Base _base;
     private Button _button;
+    private Tree _tree;
     private Text _text;
 
 
@@ -45,6 +46,11 @@ public class PopUp : MonoBehaviour
         _base = myBase;
     }
 
+    public void SetTree(Tree tree)
+    {
+        _tree = tree;
+    }
+
     public void SetPopUpAmount(int amount)
     {
         gameObject.GetComponentInChildren<Text>().text = amount.ToString();
@@ -66,6 +72,7 @@ public class PopUp : MonoBehaviour
                  _base.ButtonPressed();
                 break;
             case PopUpType.Collect:
+                _tree.ButtonPressed();
                 break;
             default:
                 Debug.LogError("Pop Up type not supported");

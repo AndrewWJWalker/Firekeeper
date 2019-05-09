@@ -4,16 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Base : MonoBehaviour, IPointerClickHandler
+public class Tree : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
-    [SerializeField] private GameObject _fencePrefab;
-    [SerializeField] private int _fenceBuildCost;
+    [SerializeField] private int _resourceAmountHarvest;
 
-    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
+    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Collect;
     private Resource _resource;
-    private Fence _fence;
 
     private bool _playerReady;
     private bool _buttonPressed;
@@ -26,24 +24,13 @@ public class Base : MonoBehaviour, IPointerClickHandler
         {
             Debug.LogError("Attach Resource script");
         }
-
-        _fence = gameObject.GetComponent<Fence>();
-
-        if (_fence == null)
-        {
-            Debug.LogError("Fence prefab is missing the fence script");
-        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         _buttonPressed = false;
 
-        if (_fencePrefab == null)
-        {
-            Debug.LogError("Fence to be built is missing");
-        }
-        _controller.InitiatePopUp(_popUp, _fencePrefab.GetComponent<Fence>(), _popUpType , this);
+        _controller.InitiatePopUp(_popUp, this, _popUpType);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -54,7 +41,7 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
             if (_buttonPressed)
             {
-                BuildFence();
+                HarvestTree();
             }
         }
     }
@@ -73,20 +60,17 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
         if (_playerReady)
         {
-            BuildFence();
+            HarvestTree();
         }
     }
 
-    private void BuildFence()
+    private void HarvestTree()
     {
-        var resourceCost = _fenceBuildCost;
+        // var resourceCost = _resourceAmountHarvest;
 
-        _resource.resourceCost = resourceCost;
+        //_resource.resourceCost = resourceCost;
+        _controller.ClearPopUp();
 
-        if (_resource.PayResourcesForBuild(ResourceType.Wood, _fencePrefab, this.gameObject))
-        {
-            _controller.ClearPopUp();
-        }
+        _resource.GainResourcesFromHarvest(ResourceType.Wood, _resourceAmountHarvest, this.gameObject);
     }
-
 }
