@@ -683,7 +683,7 @@ MonoBehaviour:
   x: 50
   z: 50
   minRadius: 5
-  count: 0
+  count: 50
 --- !u!4 &259976881
 Transform:
   m_ObjectHideFlags: 0
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259976879}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57109cfd86945e242b87ba9216b1d8b9, type: 3}
   m_Name: 
@@ -791,7 +791,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d32a39bb6d285426594372300dfbe617, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e079c6151d66ec54b8c5bf2e0970f9e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1750,8 +1750,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -0.001953125}
-  m_SizeDelta: {x: 20, y: 150}
+  m_AnchoredPosition: {x: -10, y: -150}
+  m_SizeDelta: {x: 10, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &737363196
 MonoBehaviour:
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayLength: 1
-  nightLength: 0.6
+  nightLength: 0.5
   sun: {fileID: 1425248849}
   moon: {fileID: 2128224818}
   lightTransitionTime: 2
@@ -2055,9 +2055,12 @@ MonoBehaviour:
   campFireMin: 0.5
   campFireMax: 3
   campFireBlendTime: 30
+  sunriseIntensity: 20
+  sunriseFlashTime: 0.3
   enemyManager: {fileID: 259976882}
   enemySpawner: {fileID: 259976880}
   isDay: 0
+  sundialHandle: {fileID: 1391467934}
 --- !u!4 &1010976912
 Transform:
   m_ObjectHideFlags: 0
@@ -2602,6 +2605,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -116.18101
       objectReference: {fileID: 0}
+    - target: {fileID: 3152746721686065108, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464407478706585919, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464407478779533043, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464407479642217688, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407479776069562, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -2612,6 +2635,41 @@ PrefabInstance:
       propertyPath: _resourceHudPrefab
       value: 
       objectReference: {fileID: 64136754}
+    - target: {fileID: 3464407479931789642, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464407480028757306, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 948834093448551145, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 948834093256061047, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 948834093369653182, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 948834093672592390, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 948834094244568887, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7187795100748332436, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _canvas
@@ -2737,6 +2795,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407478706585907, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407478706585904, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -2758,6 +2821,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407478779533047, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407478779533044, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -2779,6 +2847,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407478807690459, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407478807690456, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -2800,6 +2873,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407479642217690, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407479642217681, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -2821,6 +2899,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407479931789646, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407479931789647, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -2842,6 +2925,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 334262043}
+    - target: {fileID: 3464407480028757310, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fenceBuildCost
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3464407480028757311, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic

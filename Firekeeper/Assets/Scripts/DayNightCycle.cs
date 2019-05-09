@@ -14,6 +14,8 @@ public class DayNightCycle : MonoBehaviour
     public float campFireMin;
     public float campFireMax;
     public float campFireBlendTime;
+    public float sunriseIntensity = 10;
+    public float sunriseFlashTime = 0.3f;
 
     float sunIntensity;
     float moonIntensity;
@@ -30,8 +32,11 @@ public class DayNightCycle : MonoBehaviour
     float daySeconds;
     float nightSeconds;
     float t = 0;
+    float dayProgress;
+    float nightProgress;
 
     public bool isDay = false;
+    public RectTransform sundialHandle;
 
     // Start is called before the first frame update
     void Start()
@@ -68,15 +73,15 @@ public class DayNightCycle : MonoBehaviour
             {
 
                 //get percentage of current day time
-                float progress = t / daySeconds;
+                dayProgress = t / daySeconds;
                 //Debug.Log(progress);
                 //reset sun rotation
                 sunTransform.rotation = sunRotationStored;
                 //rotate the sun
-                sunTransform.rotation *= Quaternion.Euler( transform.right * (progress * 180));
-                //set the sundial
+                sunTransform.rotation *= Quaternion.Euler( transform.right * (dayProgress * 180));
+                //set the dayProgress
                 
-                if (progress > 0.8)
+                if (dayProgress > 0.8)
                 {
                     StartCoroutine(TurnDownSun(lightTransitionTime));
                 }
@@ -98,17 +103,33 @@ public class DayNightCycle : MonoBehaviour
             } else
             {
                 //get percentage of current day time
-                float progress = t / nightSeconds;
+                nightProgress = t / nightSeconds;
                 //Debug.Log(progress);
                 //reset sun rotation
                 moonTransform.rotation = moonRotationStored;
                 //rotate the sun
-                moonTransform.rotation *= Quaternion.Euler(transform.right * (progress * 180));
+                moonTransform.rotation *= Quaternion.Euler(transform.right * (nightProgress * 180));
                 //set the sundial
 
             }
         }
         //Debug.Log("Time: " + t);
+
+
+        //sundial
+        //z = 0 is night start, rotate negativley to go counterclockwise
+        float angle;
+        if (isDay)
+        {
+             angle = (1-dayProgress) * 180;
+        }
+        else
+        {
+             angle = -nightProgress * 180;
+        }
+        Vector3 rot = sundialHandle.eulerAngles;
+        rot.z = angle;
+        sundialHandle.eulerAngles = rot;
 
     }
 
@@ -173,8 +194,32 @@ public class DayNightCycle : MonoBehaviour
             sun.intensity = luminance;
             yield return new WaitForFixedUpdate();
         }
-        //kill all enemies
+        StartCoroutine(SunFlash(sunriseFlashTime));
+    }
+
+    IEnumerator SunFlash(float time)
+    {
+        float timePassed = 0;
+        float startIntensity = sun.intensity;
+        while (timePassed < time)
+        {
+            timePassed += Time.fixedDeltaTime;
+            float factor = timePassed / time;
+            float luminance = Mathf.Lerp(startIntensity, sunriseIntensity, factor);
+            sun.intensity = luminance;
+            yield return new WaitForFixedUpdate();
+        }
+        timePassed = 0;
         enemyManager.Exterminate();
+        while (timePassed < time)
+        {
+            timePassed += Time.fixedDeltaTime;
+            float factor = timePassed / time;
+            float luminance = Mathf.Lerp(sunriseIntensity, startIntensity, factor);
+            sun.intensity = luminance;
+            yield return new WaitForFixedUpdate();
+        }
+      
     }
 
     IEnumerator TurnDownSun(float time)
