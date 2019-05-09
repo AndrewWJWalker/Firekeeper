@@ -11,6 +11,14 @@ public class PopUpController : MonoBehaviour
 
     public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type)
     {
+        Base myBase = new Base();
+
+        InitiatePopUp(hud, fence, type, myBase);
+    }
+
+
+    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
+    {
         var popUp = hud.GetComponent<PopUp>();
 
         if (popUp == null)
@@ -19,7 +27,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud, fence, type);
+        InitiatePopUpOnMouseClick(hud, fence, type, myBase);
     }
 
     public void ClearPopUp()
@@ -27,7 +35,7 @@ public class PopUpController : MonoBehaviour
         Destroy(_activePopUp);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type)
+    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -37,7 +45,7 @@ public class PopUpController : MonoBehaviour
         {
             if (_activePopUp == null)
             {
-                if (fence.IsFenceFixable() && type == PopUp.PopUpType.Fix)
+                if (type == PopUp.PopUpType.Fix && fence.IsFenceFixable())
                 {
                     PositionPopUp(hud, hit);
 
@@ -55,6 +63,7 @@ public class PopUpController : MonoBehaviour
                     popUp.SetPopUpAmount(fence.GetFenceBuildCost());
 
                     popUp.SetFence(fence);
+                    popUp.SetBase(myBase);
                 }
 
             }

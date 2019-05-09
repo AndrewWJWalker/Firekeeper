@@ -16,6 +16,7 @@ public class PopUp : MonoBehaviour
     [SerializeField] private PopUpType _type;
 
     private Fence _fence;
+    private Base _base;
     private Button _button;
     private Text _text;
 
@@ -39,6 +40,11 @@ public class PopUp : MonoBehaviour
         _fence = fence;
     }
 
+    public void SetBase(Base myBase)
+    {
+        _base = myBase;
+    }
+
     public void SetPopUpAmount(int amount)
     {
         gameObject.GetComponentInChildren<Text>().text = amount.ToString();
@@ -57,6 +63,7 @@ public class PopUp : MonoBehaviour
                 _fence.ButtonPressed();
                 break;
             case PopUpType.Build:
+                 _base.ButtonPressed();
                 break;
             case PopUpType.Collect:
                 break;
