@@ -9,8 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private ResourceHud _resourceHud;
     [SerializeField] private PopUpController _popUpController;
+    [SerializeField] private DayNightCycle dayNightCycle;
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _linkSpeed = 5f;
+    
 
-    private NavMeshAgent _navMesh;
+    [SerializeField] private float _moveTargetTolerance = 0.5f;
+    
+
+    public NavMeshAgent _navMeshAgent;
 
     private bool _bShouldGatherResource;
     private bool _bShouldFixFence;
@@ -20,9 +27,13 @@ public class Player : MonoBehaviour
     private Fence _collidingFence;
     //private Build _collidingResource;
 
+    public bool moving = false;
+
+    
+
     private void Awake()
     {
-        _navMesh = gameObject.GetComponent<NavMeshAgent>();
+        _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
         if (_playerAnimator == null)
         {
@@ -42,7 +53,8 @@ public class Player : MonoBehaviour
 
     public void Move(Vector3 targetPosition)
     {
-        _navMesh.destination = targetPosition;
+        _navMeshAgent.destination = targetPosition;
+
 
         if (_popUpController == null)
         {
@@ -104,4 +116,78 @@ public class Player : MonoBehaviour
         _resourceHud.AddResources(resource.GetResourceType(), resource.GetResourcePoints());
         //_playerAnimator.SetBool("shouldGather", false);
     }
+
+    private void FixedUpdate()
+    {
+        if (_navMeshAgent.isPathStale)
+        {
+            Vector3 destination = _navMeshAgent.destination;
+            _navMeshAgent.ResetPath();
+            _navMeshAgent.destination = destination;
+        }
+
+        float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
+        //Debug.Log(distance);
+        if (distance > _moveTargetTolerance)
+        {
+    
+                moving = true;
+            
+        } else
+        {
+            if (moving)
+            {
+                Move();
+            }
+            moving = false;
+        }
+        if (moving)
+        {
+            Move();
+            
+        }
+
+        _playerAnimator.SetBool("isRunning", moving);
+
+    }
+
+    void Move()
+    {
+
+            if (dayNightCycle.isDay)
+            {
+            _navMeshAgent.areaMask = NavMesh.AllAreas;
+                if (_navMeshAgent.isOnOffMeshLink)
+            {
+                _navMeshAgent.speed = _linkSpeed;
+            } 
+            } else
+            {
+            _navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Walkable");
+
+            }
+
+        if (!_navMeshAgent.isOnOffMeshLink)
+        {
+            _navMeshAgent.speed = 0f;
+        }
+            transform.LookAt(_navMeshAgent.steeringTarget);
+            Vector3 rot = transform.eulerAngles;
+            //rot.x = 0;
+            //rot.z = 0;
+            transform.eulerAngles = rot;
+            transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
+        
+    }
+
+    public void Die()
+    {
+        //death animation
+
+        //disable HUD
+
+        //enable Game Over UI
+    }
+
+
 }
