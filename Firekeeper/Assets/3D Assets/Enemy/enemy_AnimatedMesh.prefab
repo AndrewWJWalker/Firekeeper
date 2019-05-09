@@ -57,9 +57,9 @@ MonoBehaviour:
     type: 3}
   defaultAnimation: {fileID: 11400000, guid: f365861ee22a38048a396fcc8b8b40e7, type: 2}
   animations:
-  - {fileID: 11400000, guid: 8467fbf5cfb8d514a9fdb579cd6f0132, type: 2}
-  - {fileID: 11400000, guid: f8ed7452e5540714f96239098bc3c210, type: 2}
   - {fileID: 11400000, guid: f365861ee22a38048a396fcc8b8b40e7, type: 2}
+  - {fileID: 11400000, guid: f8ed7452e5540714f96239098bc3c210, type: 2}
+  - {fileID: 11400000, guid: 8467fbf5cfb8d514a9fdb579cd6f0132, type: 2}
   speed: 1
   updateWhenOffscreen: 0
   playAutomatically: 1
