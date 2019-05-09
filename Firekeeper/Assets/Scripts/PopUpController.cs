@@ -9,6 +9,19 @@ public class PopUpController : MonoBehaviour
     private GameObject _activePopUp;
     private Ray ray;
 
+    private void Update()
+    {
+        if (_activePopUp != null)
+        {
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(_activePopUp.gameObject.transform.position);
+            RectTransform rect = _activePopUp.GetComponent<RectTransform>();
+            Vector2 localPosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.GetComponent<RectTransform>(), screenPosition, Camera.main, out localPosition);
+            _activePopUp.gameObject.transform.localPosition = localPosition;
+        }
+
+    }
+
     public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
     {
         Tree tree = new Tree();

@@ -64,58 +64,58 @@ public class Player : MonoBehaviour
         _popUpController.ClearPopUp();
     }
 
-    public void IsReadyToCollectResource()
-    {
-        if (_collidingResource != null && _bShouldGatherResource)
-        {
-            StartCoroutine(GatherResources(_collidingResource));
-        }
-    }   
+    //public void IsReadyToCollectResource()
+    //{
+    //    if (_collidingResource != null && _bShouldGatherResource)
+    //    {
+    //        StartCoroutine(GatherResources(_collidingResource));
+    //    }
+    //}   
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        _collidingResource = collider.gameObject.GetComponent<Resource>();
-        _collidingFence = collider.gameObject.GetComponent<Fence>();
-        //BuildingBase base = collider.gameObject.GetComponent<BuildingBase>();
+    //private void OnTriggerEnter(Collider collider)
+    //{
+    //    _collidingResource = collider.gameObject.GetComponent<Resource>();
+    //    _collidingFence = collider.gameObject.GetComponent<Fence>();
+    //    //BuildingBase base = collider.gameObject.GetComponent<BuildingBase>();
 
-        if (_collidingResource != null)
-        {
-            if (_bShouldGatherResource)
-            {
-                StartCoroutine(GatherResources(_collidingResource));
-            }
-        }
-        else if (_collidingFence != null)
-        {
-            if (_bShouldFixFence)
-            {
-            //StartCoroutine(ButtonPressed(fence));
-            }
-        }
-        //else if (base != null)
-        //{
-        //    _bIsColliding = true;
+    //    if (_collidingResource != null)
+    //    {
+    //        if (_bShouldGatherResource)
+    //        {
+    //            StartCoroutine(GatherResources(_collidingResource));
+    //        }
+    //    }
+    //    else if (_collidingFence != null)
+    //    {
+    //        if (_bShouldFixFence)
+    //        {
+    //        //StartCoroutine(ButtonPressed(fence));
+    //        }
+    //    }
+    //    //else if (base != null)
+    //    //{
+    //    //    _bIsColliding = true;
 
-        //    if (_bShouldBuldFence)
-        //    {
-        //        StartCoroutine(ButtonPressed(base));
-        //    }
-        //}
-    }
+    //    //    if (_bShouldBuldFence)
+    //    //    {
+    //    //        StartCoroutine(ButtonPressed(base));
+    //    //    }
+    //    //}
+    //}
 
-    private void OnTriggerExit(Collider collider)
-    {
-        _collidingResource = null;
-        _collidingFence = null;
-    }
+    //private void OnTriggerExit(Collider collider)
+    //{
+    //    _collidingResource = null;
+    //    _collidingFence = null;
+    //}
 
-    private IEnumerator GatherResources(Resource resource)
-    {
-        //_playerAnimator.SetBool("shouldGather", true);
-        yield return new WaitForSeconds(resource.GetHarvestTime());
-        _resourceHud.AddResources(resource.GetResourceType(), resource.GetResourcePoints());
-        //_playerAnimator.SetBool("shouldGather", false);
-    }
+    //private IEnumerator GatherResources(Resource resource)
+    //{
+    //    //_playerAnimator.SetBool("shouldGather", true);
+    //    yield return new WaitForSeconds(resource.GetHarvestTime());
+    //    _resourceHud.AddResources(resource.GetResourceType(), resource.GetResourcePoints());
+    //    //_playerAnimator.SetBool("shouldGather", false);
+    //}
 
     private void FixedUpdate()
     {

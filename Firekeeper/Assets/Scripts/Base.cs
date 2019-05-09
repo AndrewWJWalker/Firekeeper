@@ -13,7 +13,6 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
     private Resource _resource;
-    private Fence _fence;
 
     private bool _playerReady;
     private bool _buttonPressed;
@@ -25,13 +24,6 @@ public class Base : MonoBehaviour, IPointerClickHandler
         if (_resource == null)
         {
             Debug.LogError("Attach Resource script");
-        }
-
-        _fence = gameObject.GetComponent<Fence>();
-
-        if (_fence == null)
-        {
-            Debug.LogError("Fence prefab is missing the fence script");
         }
     }
 

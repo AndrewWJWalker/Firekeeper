@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Resource : MonoBehaviour
 {
-    [SerializeField] private ResourceData _resourceData;
+    //[SerializeField] private ResourceData _resourceData;
     [SerializeField] private GameObject _resourceHudPrefab;
 
 
@@ -22,20 +22,20 @@ public class Resource : MonoBehaviour
         }
     }
 
-    public int GetResourcePoints()
-    {
-        return _resourceData.resourcePoints;
-    }
+    //public int GetResourcePoints()
+    //{
+    //    return _resourceData.resourcePoints;
+    //}
 
-    public int GetHarvestTime()
-    {
-        return _resourceData.requiredHarvestTime;
-    }
+    //public int GetHarvestTime()
+    //{
+    //    return _resourceData.requiredHarvestTime;
+    //}
 
-    public ResourceType GetResourceType()
-    {
-        return _resourceData.resourceType;
-    }
+    //public ResourceType GetResourceType()
+    //{
+    //    return _resourceData.resourceType;
+    //}
 
     public void PayResourcesForFix(ResourceType type, Fence fence)
     {
