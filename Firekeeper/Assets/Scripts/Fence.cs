@@ -8,6 +8,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
+    [SerializeField] private GameObject _base;
     [SerializeField] private int _fenceBuildCost;
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Fix;
@@ -39,7 +40,6 @@ public class Fence : MonoBehaviour, IPointerClickHandler
     {
         _buttonPressed = false;
        
-
         _controller.InitiatePopUp(_popUp, this, _popUpType);  
     }
 
@@ -103,5 +103,10 @@ public class Fence : MonoBehaviour, IPointerClickHandler
     {
         _health.Heal(100);
         _controller.ClearPopUp();
+    }
+
+    public void OpenBase()
+    {
+        _base.SetActive(true);
     }
 }

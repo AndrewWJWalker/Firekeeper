@@ -8,10 +8,12 @@ public class Base : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
-    [SerializeField] private Fence _fence;
+    [SerializeField] private GameObject _fencePrefab;
+    [SerializeField] private int _fenceBuildCost;
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
     private Resource _resource;
+    private Fence _fence;
 
     private bool _playerReady;
     private bool _buttonPressed;
@@ -24,17 +26,24 @@ public class Base : MonoBehaviour, IPointerClickHandler
         {
             Debug.LogError("Attach Resource script");
         }
+
+        _fence = gameObject.GetComponent<Fence>();
+
+        if (_fence == null)
+        {
+            Debug.LogError("Fence prefab is missing the fence script");
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         _buttonPressed = false;
 
-        if (_fence == null)
+        if (_fencePrefab == null)
         {
             Debug.LogError("Fence to be built is missing");
         }
-        _controller.InitiatePopUp(_popUp, _fence, _popUpType);
+        _controller.InitiatePopUp(_popUp, _fencePrefab.GetComponent<Fence>(), _popUpType , this);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -70,11 +79,11 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
     private void BuildFence()
     {
-        var resourceCost = _fence.GetFenceBuildCost();
+        var resourceCost = _fenceBuildCost;
 
         _resource.resourceCost = resourceCost;
 
-        _resource.PayResourcesForBuild(ResourceType.Wood, _fence);
+        _resource.PayResourcesForBuild(ResourceType.Wood, _fencePrefab, this.gameObject);
     }
 
 }
