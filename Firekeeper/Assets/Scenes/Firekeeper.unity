@@ -8479,3 +8479,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetMax: 1
+  delayBetween: 4
+  pitchRange: 1
