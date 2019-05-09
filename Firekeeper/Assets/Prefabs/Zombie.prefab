@@ -58,7 +58,7 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
@@ -80,6 +80,8 @@ MonoBehaviour:
   strength: 1
   attackCooldown: 3
   attackRange: 2
+  agent: {fileID: 0}
+  alive: 1
 --- !u!65 &255557690435524137
 BoxCollider:
   m_ObjectHideFlags: 0

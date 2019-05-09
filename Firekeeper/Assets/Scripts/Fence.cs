@@ -101,7 +101,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     public void RestoreFenceHealth()
     {
-        _health.RestoreHealth();
+        _health.Heal(100);
         _controller.ClearPopUp();
     }
 }
