@@ -30,7 +30,8 @@ public class Health : MonoBehaviour
     {
         _healthPoints -= damage;
 
-        if (_healthPoints <= 0)        {
+        if (_healthPoints <= 0)
+        {
             Die();
         }
         UpdateHealthBar();
@@ -38,6 +39,11 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+        if (gameObject.GetComponent<Fence>() != null)
+        {
+            gameObject.GetComponent<Fence>().OpenBase();
+        }
+
         this.gameObject.SetActive(false);
         healthBar.SetActive (false);
     }

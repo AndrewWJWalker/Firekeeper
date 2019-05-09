@@ -38,7 +38,7 @@ public class SpawnTrees : MonoBehaviour
                     invalid = false;
                 }
             }
-            int index = Random.Range(0, trees.Count-1);
+            int index = Random.Range(0, trees.Count);
             GameObject tree = Instantiate(trees[index], this.transform);
             tree.transform.position = position;
             Vector3 rotation = tree.transform.eulerAngles;

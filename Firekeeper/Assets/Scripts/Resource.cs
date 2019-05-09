@@ -51,7 +51,7 @@ public class Resource : MonoBehaviour
         }
     }
 
-    public void PayResourcesForBuild(ResourceType type, Fence fence)
+    public void PayResourcesForBuild(ResourceType type, GameObject fence, GameObject myBase)
     {
         var resourceAmount = _resourceHud.GetResourcesAmount(type);
 
@@ -61,7 +61,8 @@ public class Resource : MonoBehaviour
 
             //TODO Build Animation
 
-            fence.gameObject.SetActive(true);
+            fence.SetActive(true);
+            myBase.SetActive(false);
         }
     }
 }
