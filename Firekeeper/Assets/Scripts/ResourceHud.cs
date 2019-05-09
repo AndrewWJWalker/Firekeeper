@@ -14,17 +14,23 @@ public class ResourceHud : MonoBehaviour
     private int _goldAmount;
     private int _veryExpensiveAndRareMaterialAmount;
 
-    [SerializeField] private TextMeshProUGUI _woodAmountText;
-    [SerializeField] private TextMeshProUGUI _goldAmountText;
-    [SerializeField] private TextMeshProUGUI _veryExpensiveAndRareMaterialAmountText;
+    [SerializeField] private Text _woodAmountText;
+    [SerializeField] private Text _goldAmountText;
+    [SerializeField] private Text _veryExpensiveAndRareMaterialAmountText;
 
     private void Start()
     {
-        _woodAmount = 0;
-        _goldAmount = 0;
+        _woodAmount = 1000;
+        _goldAmount = 1000;
         _veryExpensiveAndRareMaterialAmount = 0;
 
         _currentResources = new Dictionary<ResourceType, int>();
+
+        _currentResources.Add(ResourceType.Wood, _woodAmount);
+        _currentResources.Add(ResourceType.Gold, _goldAmount);
+
+        UpdateDisplay(ResourceType.Wood);
+        UpdateDisplay(ResourceType.Gold);
     }
 
     private void UpdateDisplay(ResourceType type)

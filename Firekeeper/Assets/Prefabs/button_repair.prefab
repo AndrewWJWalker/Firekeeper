@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2497337826227971215}
   - component: {fileID: 2497337826227971216}
   - component: {fileID: 2497337826227971217}
+  - component: {fileID: 3865553891243636233}
   m_Layer: 5
   m_Name: button_repair
   m_TagString: Untagged
@@ -123,6 +124,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &3865553891243636233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2497337826227971219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db068012dfeb9b46aaa68cde2978e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 1
 --- !u!1 &2497337826651288290
 GameObject:
   m_ObjectHideFlags: 0
