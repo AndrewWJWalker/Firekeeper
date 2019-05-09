@@ -55,16 +55,6 @@ public class Health : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void Heal(int heal)
-    {
-        _healthPoints += heal;
-        if (_healthPoints > _maxHealth)
-        {
-            _healthPoints = _maxHealth;
-        }
-        UpdateHealthBar();
-    }
-
     void UpdateHealthBar()
     {
         healthSlider.value = GetHealthPercentage();

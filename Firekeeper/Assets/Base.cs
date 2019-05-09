@@ -4,15 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Fence : MonoBehaviour, IPointerClickHandler
+public class Base : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
-    [SerializeField] private int _fenceBuildCost;
+    [SerializeField] private Fence _fence;
 
-    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Fix;
-
-    private Health _health;
+    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
     private Resource _resource;
 
     private bool _playerReady;
@@ -20,13 +18,6 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        _health = gameObject.GetComponent<Health>();
-
-        if (_health == null)
-        {
-            Debug.LogError("Attach Health script");
-        }
-
         _resource = gameObject.GetComponent<Resource>();
 
         if (_resource == null)
@@ -38,9 +29,12 @@ public class Fence : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _buttonPressed = false;
-       
 
-        _controller.InitiatePopUp(_popUp, this, _popUpType);  
+        if (_fence == null)
+        {
+            Debug.LogError("Fence to be built is missing");
+        }
+        _controller.InitiatePopUp(_popUp, _fence, _popUpType);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -51,7 +45,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
             if (_buttonPressed)
             {
-                FixFence();
+                BuildFence();
             }
         }
     }
@@ -70,38 +64,17 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
         if (_playerReady)
         {
-            FixFence();
+            BuildFence();
         }
     }
 
-    public bool IsFenceFixable()
+    private void BuildFence()
     {
-        return (_health.maxHealth > _health.GetCurrentHealthPoints());
-    }
-
-    private void FixFence()
-    {
-        var resourceCost = GetFenceFixCost();
+        var resourceCost = _fence.GetFenceBuildCost();
 
         _resource.resourceCost = resourceCost;
 
-        _resource.PayResourcesForFix(ResourceType.Wood, this);
+        _resource.PayResourcesForBuild(ResourceType.Wood, _fence);
     }
 
-    public int GetFenceFixCost()
-    {
-        var resourceCost = _health.maxHealth - _health.GetCurrentHealthPoints();
-        return resourceCost *= 5;
-    }
-
-    public int GetFenceBuildCost()
-    {
-        return _fenceBuildCost;
-    }
-
-    public void RestoreFenceHealth()
-    {
-        _health.RestoreHealth();
-        _controller.ClearPopUp();
-    }
 }

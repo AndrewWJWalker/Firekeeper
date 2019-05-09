@@ -8,6 +8,7 @@ public class Resource : MonoBehaviour
     [SerializeField] private ResourceData _resourceData;
     [SerializeField] private GameObject _resourceHudPrefab;
 
+
     public int resourceCost { get; set; }
     private ResourceHud _resourceHud;
 
@@ -35,7 +36,7 @@ public class Resource : MonoBehaviour
         return _resourceData.resourceType;
     }
 
-    public void PayResources(ResourceType type, Fence fence)
+    public void PayResourcesForFix(ResourceType type, Fence fence)
     {
         var resourceAmount = _resourceHud.GetResourcesAmount(type);
 
@@ -47,6 +48,20 @@ public class Resource : MonoBehaviour
 
             fence.RestoreFenceHealth();
 
+        }
+    }
+
+    public void PayResourcesForBuild(ResourceType type, Fence fence)
+    {
+        var resourceAmount = _resourceHud.GetResourcesAmount(type);
+
+        if (resourceAmount >= resourceCost)
+        {
+            _resourceHud.RemoveResources(type, resourceCost);
+
+            //TODO Build Animation
+
+            fence.gameObject.SetActive(true);
         }
     }
 }

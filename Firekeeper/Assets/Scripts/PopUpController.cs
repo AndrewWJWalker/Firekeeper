@@ -9,7 +9,7 @@ public class PopUpController : MonoBehaviour
     private GameObject _activePopUp;
     private Ray ray;
 
-    public void InitiatePopUp(GameObject hud, Fence fence)
+    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type)
     {
         var popUp = hud.GetComponent<PopUp>();
 
@@ -19,7 +19,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud, fence);
+        InitiatePopUpOnMouseClick(hud, fence, type);
     }
 
     public void ClearPopUp()
@@ -27,7 +27,7 @@ public class PopUpController : MonoBehaviour
         Destroy(_activePopUp);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence)
+    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type)
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -35,24 +35,44 @@ public class PopUpController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (_activePopUp == null && fence.IsFenceFixable())
+            if (_activePopUp == null)
             {
-                var screenSpaceCord = Camera.main.WorldToScreenPoint(hit.point);
-                var canvasRectTransform = _canvas.GetComponent<RectTransform>();
-                Vector3 SpawnPosition;
+                if (fence.IsFenceFixable() && type == PopUp.PopUpType.Fix)
+                {
+                    PositionPopUp(hud, hit);
 
-                RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
-                    Camera.main, out SpawnPosition);
+                    var popUp = _activePopUp.GetComponent<PopUp>();
 
-                _activePopUp = Instantiate(hud, SpawnPosition,
-                        Quaternion.identity, _canvas.transform) as GameObject;
+                    popUp.SetFence(fence);
+                    popUp.SetPopUpAmount(fence.GetFenceFixCost());
 
-                _activePopUp.transform.localRotation = Quaternion.identity;
+                }
+                else if (type == PopUp.PopUpType.Build)
+                {
+                    PositionPopUp(hud, hit);
 
-                var popUp = _activePopUp.GetComponent<PopUp>();
-                popUp.SetFence(fence);
-                popUp.SetPopUpAmount(fence.GetFenceFixCost());
+                    var popUp = _activePopUp.GetComponent<PopUp>();
+                    popUp.SetPopUpAmount(fence.GetFenceBuildCost());
+
+                    popUp.SetFence(fence);
+                }
+
             }
         }
+    }
+
+    private void PositionPopUp(GameObject hud, RaycastHit hit)
+    {
+        var screenSpaceCord = Camera.main.WorldToScreenPoint(hit.point);
+        var canvasRectTransform = _canvas.GetComponent<RectTransform>();
+        Vector3 SpawnPosition;
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
+            Camera.main, out SpawnPosition);
+
+        _activePopUp = Instantiate(hud, SpawnPosition,
+            Quaternion.identity, _canvas.transform) as GameObject;
+
+        _activePopUp.transform.localRotation = Quaternion.identity;
     }
 } 
