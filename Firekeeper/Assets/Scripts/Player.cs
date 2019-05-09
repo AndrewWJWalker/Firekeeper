@@ -9,10 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private ResourceHud _resourceHud;
     [SerializeField] private PopUpController _popUpController;
+    [SerializeField] private DayNightCycle dayNightCycle;
     [SerializeField] private float _speed = 1f;
-    [SerializeField] private float _moveTargetTolerance = 0.5f;
+    [SerializeField] private float _linkSpeed = 5f;
+    
 
-    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private float _moveTargetTolerance = 0.5f;
+    
+
+    public NavMeshAgent _navMeshAgent;
 
     private bool _bShouldGatherResource;
     private bool _bShouldFixFence;
@@ -22,7 +27,7 @@ public class Player : MonoBehaviour
     private Fence _collidingFence;
     //private Build _collidingResource;
 
-    private bool moving = false;
+    public bool moving = false;
 
     
 
@@ -114,8 +119,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_navMeshAgent.isPathStale)
+        {
+            Vector3 destination = _navMeshAgent.destination;
+            _navMeshAgent.ResetPath();
+            _navMeshAgent.destination = destination;
+        }
+
         float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
-        Debug.Log(distance);
+        //Debug.Log(distance);
         if (distance > _moveTargetTolerance)
         {
     
@@ -141,11 +153,41 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        transform.LookAt(_navMeshAgent.steeringTarget);
-        Vector3 rot = transform.eulerAngles;
-        rot.x = 0;
-        rot.z = 0;
-        transform.eulerAngles = rot;
-        transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
+
+            if (dayNightCycle.isDay)
+            {
+            _navMeshAgent.areaMask = NavMesh.AllAreas;
+                if (_navMeshAgent.isOnOffMeshLink)
+            {
+                _navMeshAgent.speed = _linkSpeed;
+            } 
+            } else
+            {
+            _navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Walkable");
+
+            }
+
+        if (!_navMeshAgent.isOnOffMeshLink)
+        {
+            _navMeshAgent.speed = 0f;
+        }
+            transform.LookAt(_navMeshAgent.steeringTarget);
+            Vector3 rot = transform.eulerAngles;
+            //rot.x = 0;
+            //rot.z = 0;
+            transform.eulerAngles = rot;
+            transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
+        
     }
+
+    public void Die()
+    {
+        //death animation
+
+        //disable HUD
+
+        //enable Game Over UI
+    }
+
+
 }

@@ -19,11 +19,7 @@ public class Health : MonoBehaviour
         maxHealth = _healthPoints;
 
         healthBar = Instantiate(_healthBarPrefab, _canvas.transform);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(_healthBarSpawnPoint.position);
-        RectTransform rect = healthBar.GetComponent<RectTransform>();
-        Vector2 localPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.GetComponent<RectTransform>(), screenPosition, Camera.main, out localPosition);
-        healthBar.transform.localPosition = localPosition;
+        SetHealthBarPosition();
 
 
         healthSlider = healthBar.GetComponent<Slider>();
@@ -35,10 +31,15 @@ public class Health : MonoBehaviour
         _healthPoints -= damage;
 
         if (_healthPoints <= 0)        {
-            this.gameObject.active = false;
-            healthBar.active = false;
+            Die();
         }
         UpdateHealthBar();
+    }
+
+    void Die()
+    {
+        this.gameObject.SetActive(false);
+        healthBar.SetActive (false);
     }
 
     public void Heal(int heal)
@@ -67,5 +68,19 @@ public class Health : MonoBehaviour
         Debug.Log(this.gameObject.name + " health : " + p);
 
         return p;
+    }
+    
+    void SetHealthBarPosition()
+    {
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(_healthBarSpawnPoint.position);
+        RectTransform rect = healthBar.GetComponent<RectTransform>();
+        Vector2 localPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.GetComponent<RectTransform>(), screenPosition, Camera.main, out localPosition);
+        healthBar.transform.localPosition = localPosition;
+    }
+
+    private void Update()
+    {
+        SetHealthBarPosition();
     }
 }
