@@ -73,6 +73,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
         if (_playerReady)
         {
+            _bPopUpButtonPressed = false;
             FixFence();
         }
     }
