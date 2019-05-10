@@ -44,9 +44,11 @@ public class Resource : MonoBehaviour
         {
             _resourceHud.RemoveResources(type, resourceCost);
 
+            //_resourceHud.ResourceTextToBlack();
             return true;
         }
 
+        //_resourceHud.ResourceTextToRed();
         return false;
     }
 
@@ -58,4 +60,6 @@ public class Resource : MonoBehaviour
 
         tree.SetActive(false);
     }
+
+
 }

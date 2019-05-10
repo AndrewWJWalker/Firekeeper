@@ -52,8 +52,8 @@ public class ResourceHud : MonoBehaviour
                 Debug.LogError("Resource Type is missing, it should be added through code!");
                 break;
         }
-        
-    } 
+
+    }
 
     public int GetResourcesAmount(ResourceType type)
     {
@@ -62,6 +62,7 @@ public class ResourceHud : MonoBehaviour
             Debug.LogError("Resource type " + type + " does not exist");
             return 0;
         }
+
         return _currentResources[type];
     }
 
@@ -100,4 +101,17 @@ public class ResourceHud : MonoBehaviour
 
         _currentResources.Clear();
     }
+
+    //public void ResourceTextToRed()
+    //{
+    //    _woodAmountText.color = Color.red;
+    //    _goldAmountText.color = Color.red; ;
+    //}
+
+    //public void ResourceTextToBlack()
+    //{
+    //    _woodAmountText.color = Color.black;
+    //    _goldAmountText.color = Color.black;
+    //}
+
 }
