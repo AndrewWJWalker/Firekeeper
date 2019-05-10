@@ -722,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b472aebf7dd23e42b59d187c9388644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 334262044}
   enemies: []
   agents: []
   enemyScripts: []
