@@ -7537,6 +7537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407478341096176, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _canvas
+      value: 
+      objectReference: {fileID: 1437943019}
     - target: {fileID: 3464407478341096179, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7592,11 +7597,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3464407478341096176, guid: 66a18e8dd9618b340b854560d2bb621e,
-        type: 3}
-      propertyPath: _canvas
-      value: 
-      objectReference: {fileID: 1437943019}
     - target: {fileID: 4983809591772643895, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _canvas
