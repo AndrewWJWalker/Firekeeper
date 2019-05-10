@@ -2886,6 +2886,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2720971656939382537, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 4138628379260050181, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -2906,6 +2912,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2720971656785453248, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 4138628379382914252, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -2931,6 +2943,12 @@ PrefabInstance:
       propertyPath: _base
       value: 
       objectReference: {fileID: 873847949}
+    - target: {fileID: 2720971656579141015, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 4138628379587654043, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -2951,6 +2969,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2720971657357026168, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 4138628377668591476, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -2971,6 +2995,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2720971657927952457, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 4138628378239562821, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -2991,6 +3021,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 227700795995953322, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 2271359514459235494, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _resourceHudPrefab
@@ -3006,6 +3042,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407478706585907, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407478706585904, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3032,6 +3074,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407478779533047, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407478779533044, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3058,6 +3106,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407478807690459, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407478807690456, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3084,6 +3138,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407479642217690, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407479642217681, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3110,6 +3170,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407479931789646, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407479931789647, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3136,6 +3202,12 @@ PrefabInstance:
       propertyPath: _fenceBuildCost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3464407480028757310, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _fixingAndBuildingPFX
+      value: 
+      objectReference: {fileID: 3366590718098561379, guid: 5db952f6f920d4a17b8aa657ab4705df,
+        type: 3}
     - target: {fileID: 3464407480028757311, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_IsKinematic
@@ -4920,7 +4992,7 @@ PrefabInstance:
     - target: {fileID: 9161770015269911630, guid: 1c5e5a99c3edb1042b0f8811b4ab4991,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9161770015269911730, guid: 1c5e5a99c3edb1042b0f8811b4ab4991,
         type: 3}
