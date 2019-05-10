@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-
+    public GameObject player;
     public List<GameObject> enemies;
     public List<NavMeshAgent> agents;
     public List<Enemy> enemyScripts;
@@ -28,7 +28,8 @@ public class EnemyAI : MonoBehaviour
             {
                 if (enemyScripts[loop].alive)
                 {
-                    agent.velocity = (Vector3.zero - agent.transform.position) * speed;
+                    // agent.velocity = (player.transform.position - agent.transform.position) * speed;
+                    agent.SetDestination(player.transform.position);
                 }
             }
         }
