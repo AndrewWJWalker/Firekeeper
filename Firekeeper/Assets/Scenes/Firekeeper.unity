@@ -3256,6 +3256,31 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 260570386517276273, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.859668
+      objectReference: {fileID: 0}
+    - target: {fileID: 260570386517276273, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.000000004500773
+      objectReference: {fileID: 0}
+    - target: {fileID: 260570386517276273, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.4000027
+      objectReference: {fileID: 0}
+    - target: {fileID: 260570386517276273, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.42983416
+      objectReference: {fileID: 0}
+    - target: {fileID: 260570386517276273, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3464407480028757299, guid: 66a18e8dd9618b340b854560d2bb621e, type: 3}
     - {fileID: 3464407479931789635, guid: 66a18e8dd9618b340b854560d2bb621e, type: 3}

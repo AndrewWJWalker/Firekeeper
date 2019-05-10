@@ -82,13 +82,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         return _health.IsDamaged();
     }
 
-    public int GetFenceFixCost()
-    {
-        var resourceCost = _health.maxHealth - _health.GetCurrentHealthPoints();
-        return resourceCost *= 5;
-    }
-
-    public int GetFenceBuildCost()
+    public int GetFixBuildCost()
     {
         return _fenceBuildCost;
     }
@@ -100,9 +94,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     private void FixFence()
     {
-        var resourceCost = GetFenceFixCost();
-
-        _resource.resourceCost = resourceCost;
+        _resource.resourceCost = _fenceBuildCost;
 
         if (_resource.PayResourcesForFix(ResourceType.Wood))
         {

@@ -52,8 +52,8 @@ public class ResourceHud : MonoBehaviour
                 Debug.LogError("Resource Type is missing, it should be added through code!");
                 break;
         }
-        
-    } 
+
+    }
 
     public int GetResourcesAmount(ResourceType type)
     {
@@ -62,6 +62,7 @@ public class ResourceHud : MonoBehaviour
             Debug.LogError("Resource type " + type + " does not exist");
             return 0;
         }
+
         return _currentResources[type];
     }
 

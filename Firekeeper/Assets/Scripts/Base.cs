@@ -72,6 +72,11 @@ public class Base : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public int GetFenceBuildCost()
+    {
+        return _fenceBuildCost;
+    }
+
     private void BuildFence()
     {
         _resource.resourceCost = _fenceBuildCost;

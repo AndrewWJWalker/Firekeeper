@@ -77,27 +77,27 @@ public class PopUpController : MonoBehaviour
 
         if (Physics.Raycast(_ray, out hit))
         {
-
-            //if (_activePopUp == null)
-            //{
             ClearPopUp();
                 if (type == PopUp.PopUpType.Fix && _fence.IsFenceFixable())
-
                 {
+                    var hasEnoughCurrency = _player.GetResourceAmount(ResourceType.Wood) >= _fence.GetFixBuildCost();
+
                     PositionPopUp(hud, hit);
 
                     var popUp = _activePopUp.GetComponent<PopUp>();
 
                     popUp.SetFence(_fence);
-                    popUp.SetPopUpAmount(_fence.GetFenceFixCost());
+                    popUp.SetPopUpAmount(_fence.GetFixBuildCost(), hasEnoughCurrency);
 
                 }
                 else if (type == PopUp.PopUpType.Build)
                 {
+                    var hasEnoughCurrency = _player.GetResourceAmount(ResourceType.Wood) >= _base.GetFenceBuildCost();
+
                     PositionPopUp(hud, hit);
 
                     var popUp = _activePopUp.GetComponent<PopUp>();
-                    popUp.SetPopUpAmount(_fence.GetFenceBuildCost());
+                    popUp.SetPopUpAmount(_fence.GetFixBuildCost(), hasEnoughCurrency);
 
                     popUp.SetFence(_fence);
                     popUp.SetBase(_base);
@@ -110,8 +110,6 @@ public class PopUpController : MonoBehaviour
 
                     popUp.SetTree(_tree);
                 }
-
-            //}
         }
     }
 

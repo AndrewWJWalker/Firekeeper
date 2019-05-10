@@ -52,9 +52,18 @@ public class PopUp : MonoBehaviour
         _tree = tree;
     }
 
-    public void SetPopUpAmount(int amount)
+    public void SetPopUpAmount(int amount, bool hasEnoughCurrency)
     {
-        gameObject.GetComponentInChildren<Text>().text = amount.ToString();
+        var text = gameObject.GetComponentInChildren<Text>();
+       text.text = amount.ToString();
+        if (hasEnoughCurrency)
+        {
+            text.color = Color.black;
+        }
+        else
+        {
+            text.color = Color.red;
+        }
     }
 
     private void PopUpButtonClicked()
