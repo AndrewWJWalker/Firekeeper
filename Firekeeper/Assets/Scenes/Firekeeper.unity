@@ -2877,6 +2877,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 7187795100748332436, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5126919474564234897, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -2903,6 +2908,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 7187795100896393821, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5126919474409355608, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -2929,6 +2939,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 7187795101109507850, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5126919474354033679, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -2960,6 +2975,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 7187795100255746533, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5126919475177863904, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -2986,6 +3006,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 7187795099752927956, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5126919475682759121, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -3012,6 +3037,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943016}
+    - target: {fileID: 4983809591772643895, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7047108662917087538, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: _player
@@ -5228,6 +5258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Loop
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540596475035236065, guid: c3513c12b6ce9f640bc9b66fa72c7a07,
+        type: 3}
+      propertyPath: strength
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3513c12b6ce9f640bc9b66fa72c7a07, type: 3}
