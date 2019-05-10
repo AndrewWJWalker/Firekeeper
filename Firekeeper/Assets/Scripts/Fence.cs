@@ -10,6 +10,8 @@ public class Fence : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _popUp;
     [SerializeField] private GameObject _base;
     [SerializeField] private int _fenceBuildCost;
+    [SerializeField] private GameObject _fixingAndBuildingPFX;
+    [SerializeField] private float _particleDuration = 1f;
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Fix;
 
@@ -104,10 +106,16 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         if (_resource.PayResourcesForFix(ResourceType.Wood))
         {
             _controller.ClearPopUp();
-            // Start Animation Coroutine
-            //pass the health parameter so you can do it on the player _health.RestoreHealth();
-            //gameObject.GetComponentInParent<Player>().
-            //RestoreFenceHealth();
+            Instantiate(_fixingAndBuildingPFX, transform.position, Quaternion.identity);
+
+            StartCoroutine(PlayFixAndBuildAnimation());
         }
+    }
+
+    private IEnumerator PlayFixAndBuildAnimation()
+    {
+        yield return new WaitForSeconds(_particleDuration);
+        _health.RestoreHealth();
+        Destroy(_fixingAndBuildingPFX);
     }
 }
