@@ -14,7 +14,6 @@ public class Playlist : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
@@ -24,14 +23,21 @@ public class Playlist : MonoBehaviour
         {
             if (dayNightManager.isDay)
             {
-                 
+                PlayNext(daySongs);
             } else {
-
+                PlayNext(nightSongs);
             }
         }
+    }
 
+    public void PlayDay()
+    {
+        PlayNext(daySongs);
+    }
 
-
+    public void PlayNight()
+    {
+        PlayNext(nightSongs);
     }
 
     void PlayNext(List<AudioClip> clips)

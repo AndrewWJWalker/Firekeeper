@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public float invalidBound = 5f;
     public float campSnapDistance = 20f;
+    public float camMoveAmount = 20f;
 
     Vector3 offset;
     Vector3 movementOffset;
@@ -51,10 +52,10 @@ public class CameraFollow : MonoBehaviour
                 canFollow = true;
                 //  t = 0;
 
-                movementOffset = this.transform.position - target.transform.position;
+               // movementOffset = this.transform.position - target.transform.position;
                 if (player.moving)
                 {
-                    movementOffset += Vector3.Normalize(player.transform.forward) * 8f;
+                    //movementOffset += Vector3.Normalize(player.transform.forward) * camMoveAmount;
                 }
             }
             else
@@ -75,7 +76,7 @@ public class CameraFollow : MonoBehaviour
                 // Debug.Log(t);
                 //currentOffset = Vector3.Lerp(movementOffset, offset, t);
                 //currentOffset = Vector3.SmoothDamp(movementOffset, offset, ref smoothDampVelocity, 3f);
-                transform.position = target.transform.position + movementOffset;
+                transform.position = target.transform.position + offset;
 
             }
         }
