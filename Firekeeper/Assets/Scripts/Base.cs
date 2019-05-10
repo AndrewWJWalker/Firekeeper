@@ -10,6 +10,8 @@ public class Base : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _popUp;
     [SerializeField] private GameObject _fencePrefab;
     [SerializeField] private int _fenceBuildCost;
+    [SerializeField] private GameObject _fixingAndBuildingPFX;
+    [SerializeField] private float _particleDuration = 1f;
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
     private Resource _resource;
@@ -77,13 +79,16 @@ public class Base : MonoBehaviour, IPointerClickHandler
         {
             _controller.ClearPopUp();
 
-            // Start Animation Coroutine
-            // pass the _fencePrefab and this game object references to the player so you can disable them when we want
-            //gameObject.GetComponentInParent<Player>().
-
-            //_fencePrefab.SetActive(true);
-            //gameObject.SetActive(false);
+            StartCoroutine(PlayFixAndBuildAnimation());
         }
     }
 
+    private IEnumerator PlayFixAndBuildAnimation()
+    {
+        yield return new WaitForSeconds(_particleDuration);
+        _fencePrefab.SetActive(true);
+        gameObject.SetActive(false);
+
+        Destroy(_fixingAndBuildingPFX);
+    }
 }
