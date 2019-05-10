@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     public bool moving = false;
 
+    public bool canEnterCampAtNight = true;
+
     private void Awake()
     {
         _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -147,18 +149,19 @@ public class Player : MonoBehaviour
     private void Move()
     {
 
-            if (dayNightCycle.isDay)
-            {
-            _navMeshAgent.areaMask = NavMesh.AllAreas;
-                if (_navMeshAgent.isOnOffMeshLink)
-            {
-                _navMeshAgent.speed = _linkSpeed;
-            } 
-            } else
-            {
-            _navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Walkable");
+        //if (dayNightCycle.isDay || canEnterCampAtNight)
+        //{
+        //     _navMeshAgent.areaMask = NavMesh.AllAreas;
+        if (_navMeshAgent.isOnOffMeshLink)
+        {
+            _navMeshAgent.speed = _linkSpeed;
+            canEnterCampAtNight = false;
+        }
+        //} else
+        //{
+        //    _navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Walkable");
 
-            }
+        //}
 
         if (!_navMeshAgent.isOnOffMeshLink)
         {
@@ -176,7 +179,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Enemy enemy = other.gameObject.GetComponent<Enemy>();
-        if (enemy != null)
+        if (enemy != null && enemy.alive)
         {
             Die();
         }

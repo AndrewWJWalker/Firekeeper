@@ -16,6 +16,7 @@ public class DayNightCycle : MonoBehaviour
     public float campFireBlendTime;
     public float sunriseIntensity = 10;
     public float sunriseFlashTime = 0.3f;
+    public Player player;
 
     float sunIntensity;
     float moonIntensity;
@@ -37,6 +38,8 @@ public class DayNightCycle : MonoBehaviour
 
     public bool isDay = false;
     public RectTransform sundialHandle;
+
+    public Playlist musicManager;
 
     // Start is called before the first frame update
     void Start()
@@ -143,6 +146,10 @@ public class DayNightCycle : MonoBehaviour
 
         //start spawning enemies
         enemySpawner.BeginSpawn();
+
+        musicManager.PlayNight();
+
+        player.canEnterCampAtNight = true;
     }
 
     void Sunrise()
@@ -153,7 +160,7 @@ public class DayNightCycle : MonoBehaviour
 
         //turn down the campfire
         StartCoroutine(TurnDownCampfire(campFireBlendTime));
-
+        musicManager.PlayDay();
 
     }
 
