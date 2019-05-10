@@ -49,12 +49,10 @@ public class Player : MonoBehaviour
         }
 
         float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
-        //Debug.Log(distance);
+
         if (distance > _moveTargetTolerance)
         {
-
             moving = true;
-
         }
         else
         {
@@ -97,56 +95,8 @@ public class Player : MonoBehaviour
         _popUpController.ClearPopUp();
     }
 
-    //private void OnTriggerEnter(Collider collider)
-    //{
-    //    _collidingResource = collider.gameObject.GetComponent<Resource>();
-    //    _collidingFence = collider.gameObject.GetComponent<Fence>();
-    //    //BuildingBase base = collider.gameObject.GetComponent<BuildingBase>();
-
-    //    if (_collidingResource != null)
-    //    {
-    //        if (_bShouldGatherResource)
-    //        {
-    //            StartCoroutine(GatherResources(_collidingResource));
-    //        }
-    //    }
-    //    else if (_collidingFence != null)
-    //    {
-    //        if (_bShouldFixFence)
-    //        {
-    //        //StartCoroutine(PopUpButtonPressed(fence));
-    //        }
-    //    }
-    //    //else if (base != null)
-    //    //{
-    //    //    _bIsColliding = true;
-
-    //    //    if (_bShouldBuldFence)
-    //    //    {
-    //    //        StartCoroutine(PopUpButtonPressed(base));
-    //    //    }
-    //    //}
-    //}
-
-    //private void OnTriggerExit(Collider collider)
-    //{
-    //    _collidingResource = null;
-    //    _collidingFence = null;
-    //}
-
-    //private IEnumerator GatherResources(Resource resource)
-    //{
-    //    //_playerAnimator.SetBool("shouldGather", true);
-    //    yield return new WaitForSeconds(resource.GetHarvestTime());
-    //    _resourceHud.AddResources(resource.GetResourceType(), resource.GetResourcePoints());
-    //    //_playerAnimator.SetBool("shouldGather", false);
-    //}
-
-    
-
     private void Move()
     {
-
             if (dayNightCycle.isDay)
             {
             _navMeshAgent.areaMask = NavMesh.AllAreas;
@@ -192,8 +142,10 @@ public class Player : MonoBehaviour
 
         //enable Game Over UI
         Time.timeScale = 0f;
-
     }
 
-
+    public int GetResourceAmount(ResourceType type)
+    {
+        return _resourceHud.GetResourcesAmount(type);
+    }
 }

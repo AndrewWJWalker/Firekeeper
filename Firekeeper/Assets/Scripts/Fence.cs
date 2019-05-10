@@ -82,7 +82,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         return _health.IsDamaged();
     }
 
-    public int GetFenceBuildCost()
+    public int GetFixBuildCost()
     {
         return _fenceBuildCost;
     }

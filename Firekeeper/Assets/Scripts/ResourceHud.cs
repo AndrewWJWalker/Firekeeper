@@ -101,17 +101,4 @@ public class ResourceHud : MonoBehaviour
 
         _currentResources.Clear();
     }
-
-    //public void ResourceTextToRed()
-    //{
-    //    _woodAmountText.color = Color.red;
-    //    _goldAmountText.color = Color.red; ;
-    //}
-
-    //public void ResourceTextToBlack()
-    //{
-    //    _woodAmountText.color = Color.black;
-    //    _goldAmountText.color = Color.black;
-    //}
-
 }
