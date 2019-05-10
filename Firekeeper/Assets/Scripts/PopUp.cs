@@ -10,15 +10,16 @@ public class PopUp : MonoBehaviour
     {
         Fix = 1 << 0,
         Build = 1 << 1,
-        Collect = 1 << 2
+        Harvest = 1 << 2
     }
 
     [SerializeField] private PopUpType _type;
 
     private Fence _fence;
     private Base _base;
-    private Button _button;
     private Tree _tree;
+
+    private Button _button;
     private Text _text;
 
 
@@ -63,15 +64,25 @@ public class PopUp : MonoBehaviour
             case PopUpType.Fix:
                 if (_fence == null)
                 {
-                    Debug.LogError("Fence reference is missing");
+                    Debug.LogError("Fence reference is missing from pop up");
                     return;
                 }
-                _fence.ButtonPressed();
+                _fence.PopUpButtonPressed();
                 break;
             case PopUpType.Build:
-                 _base.ButtonPressed();
+                if (_base == null)
+                {
+                    Debug.LogError("Base reference is missing from pop up");
+                    return;
+                }
+                _base.ButtonPressed();
                 break;
-            case PopUpType.Collect:
+            case PopUpType.Harvest:
+                if (_tree == null)
+                {
+                    Debug.LogError("Tree reference is missing from pop up");
+                    return;
+                }
                 _tree.ButtonPressed();
                 break;
             default:

@@ -17,7 +17,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
     private Resource _resource;
 
     private bool _playerReady;
-    private bool _buttonPressed;
+    private bool _bPopUpButtonPressed;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _buttonPressed = false;
+        _bPopUpButtonPressed = false;
        
         _controller.InitiatePopUp(_popUp, this, _popUpType);  
     }
@@ -49,7 +49,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         {
             _playerReady = true;
 
-            if (_buttonPressed)
+            if (_bPopUpButtonPressed)
             {
                 FixFence();
             }
@@ -64,9 +64,9 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void ButtonPressed()
+    public void PopUpButtonPressed()
     {
-        _buttonPressed = true;
+        _bPopUpButtonPressed = true;
 
         if (_playerReady)
         {
@@ -76,16 +76,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     public bool IsFenceFixable()
     {
-        return (_health.maxHealth > _health.GetCurrentHealthPoints());
-    }
-
-    private void FixFence()
-    {
-        var resourceCost = GetFenceFixCost();
-
-        _resource.resourceCost = resourceCost;
-
-        _resource.PayResourcesForFix(ResourceType.Wood, this);
+        return _health.IsDamaged();
     }
 
     public int GetFenceFixCost()
@@ -99,14 +90,24 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         return _fenceBuildCost;
     }
 
-    public void RestoreFenceHealth()
-    {
-        _health.Heal(100);
-        _controller.ClearPopUp();
-    }
-
     public void OpenBase()
     {
         _base.SetActive(true);
+    }
+
+    private void FixFence()
+    {
+        var resourceCost = GetFenceFixCost();
+
+        _resource.resourceCost = resourceCost;
+
+        if (_resource.PayResourcesForFix(ResourceType.Wood))
+        {
+            _controller.ClearPopUp();
+            // Start Animation Coroutine
+            //pass the health parameter so you can do it on the player _health.RestoreHealth();
+            //gameObject.GetComponentInParent<Player>().
+            //RestoreFenceHealth();
+        }
     }
 }

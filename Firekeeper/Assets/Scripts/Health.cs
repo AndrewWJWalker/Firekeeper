@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-
     [SerializeField] private int _healthPoints;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _healthBarPrefab;
     [SerializeField] private Transform _healthBarSpawnPoint;
+
     public int maxHealth;
     private Slider healthSlider;
     private GameObject healthBar;
@@ -26,6 +26,11 @@ public class Health : MonoBehaviour
         UpdateHealthBar();
     }
 
+    private void Update()
+    {
+        SetHealthBarPosition();
+    }
+
     public void DealDamage(int damage)
     {
         _healthPoints -= damage;
@@ -37,7 +42,19 @@ public class Health : MonoBehaviour
         UpdateHealthBar();
     }
 
-    void Die()
+    public bool IsDamaged()
+    {
+        return maxHealth != _healthPoints;
+    }
+
+    public void RestoreHealth()
+    {
+        _healthPoints = maxHealth;
+
+        UpdateHealthBar();
+    }
+
+    private void Die()
     {
         if (gameObject.GetComponent<Fence>() != null)
         {
@@ -48,45 +65,34 @@ public class Health : MonoBehaviour
         healthBar.SetActive (false);
     }
 
-    public void Heal(int heal)
-    {
-        _healthPoints += heal;
-        if (_healthPoints > maxHealth)
-        {
-            _healthPoints = maxHealth;
-        }
-        UpdateHealthBar();
-    }
-
-    void UpdateHealthBar()
-    {
-        healthSlider.value = GetHealthPercentage();
-    }
-
     public int GetCurrentHealthPoints()
     {
         return _healthPoints;
     }
 
-    public float GetHealthPercentage()
-    {
-        float p = (float)_healthPoints / (float)maxHealth;
-        Debug.Log(this.gameObject.name + " health : " + p);
+    //public void Heal(int heal)
+    //{
+    //    _healthPoints += heal;
+    //    if (_healthPoints > maxHealth)
+    //    {
+    //        _healthPoints = maxHealth;
+    //    }
+    //    UpdateHealthBar();
+    //}
 
-        return p;
+    private void UpdateHealthBar()
+    {
+        var healthPercentage = (float)_healthPoints / (float)maxHealth;
+
+        healthSlider.value = healthPercentage;
     }
-    
-    void SetHealthBarPosition()
+
+    private void SetHealthBarPosition()
     {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(_healthBarSpawnPoint.position);
         RectTransform rect = healthBar.GetComponent<RectTransform>();
         Vector2 localPosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.GetComponent<RectTransform>(), screenPosition, Camera.main, out localPosition);
         healthBar.transform.localPosition = localPosition;
-    }
-
-    private void Update()
-    {
-        SetHealthBarPosition();
     }
 }

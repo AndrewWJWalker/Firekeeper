@@ -5,11 +5,10 @@ using UnityEngine.EventSystems;
 
 public class Resource : MonoBehaviour
 {
-    //[SerializeField] private ResourceData _resourceData;
     [SerializeField] private GameObject _resourceHudPrefab;
 
-
     public int resourceCost { get; set; }
+
     private ResourceHud _resourceHud;
 
     private void Start()
@@ -22,22 +21,7 @@ public class Resource : MonoBehaviour
         }
     }
 
-    //public int GetResourcePoints()
-    //{
-    //    return _resourceData.resourcePoints;
-    //}
-
-    //public int GetHarvestTime()
-    //{
-    //    return _resourceData.requiredHarvestTime;
-    //}
-
-    //public ResourceType GetResourceType()
-    //{
-    //    return _resourceData.resourceType;
-    //}
-
-    public void PayResourcesForFix(ResourceType type, Fence fence)
+    public bool PayResourcesForFix(ResourceType type)
     {
         var resourceAmount = _resourceHud.GetResourcesAmount(type);
 
@@ -46,24 +30,19 @@ public class Resource : MonoBehaviour
             _resourceHud.RemoveResources(type, resourceCost);
 
             //TODO Fixing Animation
-
-            fence.RestoreFenceHealth();
-
+            return true;
         }
+        return false;
     }
+    
 
-    public bool PayResourcesForBuild(ResourceType type, GameObject fence, GameObject myBase)
+    public bool PayResourcesForBuild(ResourceType type)
     {
         var resourceAmount = _resourceHud.GetResourcesAmount(type);
 
         if (resourceAmount >= resourceCost)
         {
             _resourceHud.RemoveResources(type, resourceCost);
-
-            //TODO Build Animation
-
-            fence.SetActive(true);
-            myBase.SetActive(false);
 
             return true;
         }

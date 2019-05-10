@@ -26,11 +26,8 @@ public class Player : MonoBehaviour
 
     private Resource _collidingResource;
     private Fence _collidingFence;
-    //private Build _collidingResource;
 
     public bool moving = false;
-
-    
 
     private void Awake()
     {
@@ -40,6 +37,41 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Currently missing the animator");
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_navMeshAgent.isPathStale)
+        {
+            Vector3 destination = _navMeshAgent.destination;
+            _navMeshAgent.ResetPath();
+            _navMeshAgent.destination = destination;
+        }
+
+        float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
+        //Debug.Log(distance);
+        if (distance > _moveTargetTolerance)
+        {
+
+            moving = true;
+
+        }
+        else
+        {
+            if (moving)
+            {
+                Move();
+            }
+            moving = false;
+        }
+        if (moving)
+        {
+            Move();
+
+        }
+
+        _playerAnimator.SetBool("isRunning", moving);
+
     }
 
     public void SetShouldGatherResource(bool shouldGather)
@@ -65,14 +97,6 @@ public class Player : MonoBehaviour
         _popUpController.ClearPopUp();
     }
 
-    //public void IsReadyToCollectResource()
-    //{
-    //    if (_collidingResource != null && _bShouldGatherResource)
-    //    {
-    //        StartCoroutine(GatherResources(_collidingResource));
-    //    }
-    //}   
-
     //private void OnTriggerEnter(Collider collider)
     //{
     //    _collidingResource = collider.gameObject.GetComponent<Resource>();
@@ -90,7 +114,7 @@ public class Player : MonoBehaviour
     //    {
     //        if (_bShouldFixFence)
     //        {
-    //        //StartCoroutine(ButtonPressed(fence));
+    //        //StartCoroutine(PopUpButtonPressed(fence));
     //        }
     //    }
     //    //else if (base != null)
@@ -99,7 +123,7 @@ public class Player : MonoBehaviour
 
     //    //    if (_bShouldBuldFence)
     //    //    {
-    //    //        StartCoroutine(ButtonPressed(base));
+    //    //        StartCoroutine(PopUpButtonPressed(base));
     //    //    }
     //    //}
     //}
@@ -118,41 +142,9 @@ public class Player : MonoBehaviour
     //    //_playerAnimator.SetBool("shouldGather", false);
     //}
 
-    private void FixedUpdate()
-    {
-        if (_navMeshAgent.isPathStale)
-        {
-            Vector3 destination = _navMeshAgent.destination;
-            _navMeshAgent.ResetPath();
-            _navMeshAgent.destination = destination;
-        }
-
-        float distance = Vector3.Distance(this.transform.position, _navMeshAgent.destination);
-        //Debug.Log(distance);
-        if (distance > _moveTargetTolerance)
-        {
     
-                moving = true;
-            
-        } else
-        {
-            if (moving)
-            {
-                Move();
-            }
-            moving = false;
-        }
-        if (moving)
-        {
-            Move();
-            
-        }
 
-        _playerAnimator.SetBool("isRunning", moving);
-
-    }
-
-    void Move()
+    private void Move()
     {
 
             if (dayNightCycle.isDay)
