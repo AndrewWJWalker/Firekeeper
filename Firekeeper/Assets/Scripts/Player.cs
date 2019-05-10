@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     
 
     public NavMeshAgent _navMeshAgent;
+    [SerializeField] GameObject gameOverUI;
 
     private bool _bShouldGatherResource;
     private bool _bShouldFixFence;
@@ -172,13 +173,26 @@ public class Player : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            Die();
+        }
+    }
+
+
     public void Die()
     {
         //death animation
+        _playerAnimator.SetTrigger("Die");
 
-        //disable HUD
+        gameOverUI.SetActive(true);
 
         //enable Game Over UI
+        Time.timeScale = 0f;
+
     }
 
 

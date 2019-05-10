@@ -57,11 +57,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2812642024635102693}
-  - {fileID: 135850022980259383}
-  - {fileID: 135850022339480975}
-  - {fileID: 135850023483073798}
-  - {fileID: 135850022680010968}
   - {fileID: 135850022487673414}
+  - {fileID: 135850023483073798}
+  - {fileID: 135850022980259383}
+  - {fileID: 135850022680010968}
+  - {fileID: 135850022339480975}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -258,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 1751143879354582486, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
       propertyPath: m_Name
-      value: Fence 4
+      value: Fence 5
       objectReference: {fileID: 0}
     - target: {fileID: 1751143879354582486, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
@@ -544,7 +544,7 @@ PrefabInstance:
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
@@ -662,7 +662,7 @@ PrefabInstance:
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
@@ -765,7 +765,7 @@ PrefabInstance:
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2634906357173380489, guid: a4964cbe0c1e92446b13f3a4775ec4a1,
         type: 3}

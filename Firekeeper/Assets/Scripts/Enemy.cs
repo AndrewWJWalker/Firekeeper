@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(agent);
         }
+        StopAllCoroutines();
         StartCoroutine(DeathAnimation());
         alive = false;
     }

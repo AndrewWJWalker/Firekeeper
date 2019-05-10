@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ResourceHud : MonoBehaviour
 {
+
+
     private Dictionary<ResourceType, int> _currentResources;
 
     [SerializeField] private int _woodAmount = 0;
@@ -18,10 +20,10 @@ public class ResourceHud : MonoBehaviour
     [SerializeField] private Text _goldAmountText;
     [SerializeField] private Text _veryExpensiveAndRareMaterialAmountText;
 
+
     private void Start()
     {
-        //_woodAmount = 1000;
-        //_goldAmount = 1000;
+
         _veryExpensiveAndRareMaterialAmount = 0;
 
         _currentResources = new Dictionary<ResourceType, int>();

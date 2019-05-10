@@ -77,9 +77,12 @@ public class PopUpController : MonoBehaviour
 
         if (Physics.Raycast(_ray, out hit))
         {
-            if (_activePopUp == null)
-            {
-                if (type == PopUp.PopUpType.Fix && _fence.IsFenceFixable())
+
+            //if (_activePopUp == null)
+            //{
+            ClearPopUp();
+                if (type == PopUp.PopUpType.Fix && fence.IsFenceFixable())
+
                 {
                     PositionPopUp(hud, hit);
 
@@ -108,7 +111,7 @@ public class PopUpController : MonoBehaviour
                     popUp.SetTree(_tree);
                 }
 
-            }
+            //}
         }
     }
 
