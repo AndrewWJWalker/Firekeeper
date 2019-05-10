@@ -71,13 +71,18 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
     private void BuildFence()
     {
-        var resourceCost = _fenceBuildCost;
+        _resource.resourceCost = _fenceBuildCost;
 
-        _resource.resourceCost = resourceCost;
-
-        if (_resource.PayResourcesForBuild(ResourceType.Wood, _fencePrefab, this.gameObject))
+        if (_resource.PayResourcesForBuild(ResourceType.Wood))
         {
             _controller.ClearPopUp();
+
+            // Start Animation Coroutine
+            // pass the _fencePrefab and this game object references to the player so you can disable them when we want
+            //gameObject.GetComponentInParent<Player>().
+
+            //_fencePrefab.SetActive(true);
+            //gameObject.SetActive(false);
         }
     }
 

@@ -10,8 +10,8 @@ public class ResourceHud : MonoBehaviour
 {
     private Dictionary<ResourceType, int> _currentResources;
 
-    private int _woodAmount;
-    private int _goldAmount;
+    [SerializeField] private int _woodAmount = 0;
+    [SerializeField] private int _goldAmount = 0;
     private int _veryExpensiveAndRareMaterialAmount;
 
     [SerializeField] private Text _woodAmountText;
@@ -20,8 +20,8 @@ public class ResourceHud : MonoBehaviour
 
     private void Start()
     {
-        _woodAmount = 1000;
-        _goldAmount = 1000;
+        //_woodAmount = 1000;
+        //_goldAmount = 1000;
         _veryExpensiveAndRareMaterialAmount = 0;
 
         _currentResources = new Dictionary<ResourceType, int>();
@@ -80,14 +80,13 @@ public class ResourceHud : MonoBehaviour
 
     public void RemoveResources(ResourceType type, int amount)
     {
-        if (!_currentResources.ContainsKey(type))
+        if (!_currentResources.ContainsKey(type) || _currentResources[type] - amount < 0)
         {
             return;
         }
 
-        if (_currentResources[type] - amount < 0 ) { return; }
-
         _currentResources[type] -= amount;
+
         UpdateDisplay(type);
     }
 

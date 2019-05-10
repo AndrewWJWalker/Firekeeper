@@ -5,12 +5,18 @@ using UnityEngine;
 public class PopUpController : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private Player _player;
 
     private GameObject _activePopUp;
-    private Ray ray;
+    private Ray _ray;
+
+    private Fence _fence;
+    private Base _base;
+    private Tree _tree;
 
     private void Update()
     {
+        //TODO decide if this stays or not
         if (_activePopUp != null)
         {
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(_activePopUp.gameObject.transform.position);
@@ -24,29 +30,28 @@ public class PopUpController : MonoBehaviour
 
     public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
     {
-        Tree tree = new Tree();
+        _fence = fence;
+        _base = myBase;
 
-        InitiatePopUp(hud, fence, type, myBase, tree);
+        InitiatePopUp(hud, type);
     }
 
     public void InitiatePopUp(GameObject hud, Tree tree, PopUp.PopUpType type)
     {
-        Base myBase = new Base();
-        Fence fence = new Fence();
+        _tree = tree;
 
-        InitiatePopUp(hud, fence, type, myBase, tree);
+        InitiatePopUp(hud, type);
     }
 
     public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type)
     {
-        Base myBase = new Base();
-        Tree tree = new Tree();
+        _fence = fence;
         
-        InitiatePopUp(hud, fence, type, myBase, tree);
+        InitiatePopUp(hud, type);
     }
 
 
-    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase, Tree tree)
+    public void InitiatePopUp(GameObject hud, PopUp.PopUpType type)
     {
         var popUp = hud.GetComponent<PopUp>();
 
@@ -56,7 +61,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud, fence, type, myBase, tree);
+        InitiatePopUpOnMouseClick(hud, type);
     }
 
     public void ClearPopUp()
@@ -64,24 +69,24 @@ public class PopUpController : MonoBehaviour
         Destroy(_activePopUp);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase, Tree tree)
+    private void InitiatePopUpOnMouseClick(GameObject hud, PopUp.PopUpType type)
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(_ray, out hit))
         {
             if (_activePopUp == null)
             {
-                if (type == PopUp.PopUpType.Fix && fence.IsFenceFixable())
+                if (type == PopUp.PopUpType.Fix && _fence.IsFenceFixable())
                 {
                     PositionPopUp(hud, hit);
 
                     var popUp = _activePopUp.GetComponent<PopUp>();
 
-                    popUp.SetFence(fence);
-                    popUp.SetPopUpAmount(fence.GetFenceFixCost());
+                    popUp.SetFence(_fence);
+                    popUp.SetPopUpAmount(_fence.GetFenceFixCost());
 
                 }
                 else if (type == PopUp.PopUpType.Build)
@@ -89,18 +94,18 @@ public class PopUpController : MonoBehaviour
                     PositionPopUp(hud, hit);
 
                     var popUp = _activePopUp.GetComponent<PopUp>();
-                    popUp.SetPopUpAmount(fence.GetFenceBuildCost());
+                    popUp.SetPopUpAmount(_fence.GetFenceBuildCost());
 
-                    popUp.SetFence(fence);
-                    popUp.SetBase(myBase);
+                    popUp.SetFence(_fence);
+                    popUp.SetBase(_base);
                 }
-                else if (type == PopUp.PopUpType.Collect)
+                else if (type == PopUp.PopUpType.Harvest)
                 {
                     PositionPopUp(hud, hit);
 
                     var popUp = _activePopUp.GetComponent<PopUp>();
 
-                    popUp.SetTree(tree);
+                    popUp.SetTree(_tree);
                 }
 
             }

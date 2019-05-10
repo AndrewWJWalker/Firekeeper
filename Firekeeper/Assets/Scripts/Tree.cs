@@ -10,7 +10,7 @@ public class Tree : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _popUp;
     [SerializeField] private int _resourceAmountHarvest;
 
-    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Collect;
+    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Harvest;
     private Resource _resource;
 
     private bool _playerReady;
@@ -70,7 +70,10 @@ public class Tree : MonoBehaviour, IPointerClickHandler
 
         //_resource.resourceCost = resourceCost;
         _controller.ClearPopUp();
+        // Start Animation Coroutine
+        // pass the resource, resource type, the amount and this game object references to the player so you can disable them when we want
+        //gameObject.GetComponentInParent<Player>().
 
-        _resource.GainResourcesFromHarvest(ResourceType.Wood, _resourceAmountHarvest, this.gameObject);
+        //_resource.GainResourcesFromHarvest(ResourceType.Wood, _resourceAmountHarvest, this.gameObject);
     }
 }
