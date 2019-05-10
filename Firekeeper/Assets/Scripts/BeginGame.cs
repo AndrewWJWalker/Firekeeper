@@ -10,5 +10,6 @@ public class BeginGame : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene("Firekeeper");
+        Time.timeScale = 1;
     }
 }
