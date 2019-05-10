@@ -15,6 +15,7 @@ public class Base : MonoBehaviour, IPointerClickHandler
 
     private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Build;
     private Resource _resource;
+    private GameObject _currentlyPlayingPFX;
 
     private bool _playerReady;
     private bool _buttonPressed;
@@ -79,6 +80,7 @@ public class Base : MonoBehaviour, IPointerClickHandler
         {
             _controller.ClearPopUp();
 
+            _currentlyPlayingPFX = Instantiate(_fixingAndBuildingPFX, transform.position, Quaternion.identity);
             StartCoroutine(PlayFixAndBuildAnimation());
         }
     }
@@ -89,6 +91,6 @@ public class Base : MonoBehaviour, IPointerClickHandler
         _fencePrefab.SetActive(true);
         gameObject.SetActive(false);
 
-        Destroy(_fixingAndBuildingPFX);
+        Destroy(_currentlyPlayingPFX);
     }
 }
