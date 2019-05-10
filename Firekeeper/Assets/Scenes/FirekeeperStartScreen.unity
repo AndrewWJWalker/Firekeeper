@@ -4554,5 +4554,15 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d5493d6b6717ff445aed24ae5c08a048, type: 2}
+    - target: {fileID: 5925246734482080656, guid: a1e9d0ea40fd1b9448afd85a2992dd00,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: cbf3b848e2f814ddc844f9f9a5691932, type: 3}
+    - target: {fileID: 384298026011439297, guid: a1e9d0ea40fd1b9448afd85a2992dd00,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.318
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1e9d0ea40fd1b9448afd85a2992dd00, type: 3}
