@@ -261,6 +261,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1226666714}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &64136755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5956082422695961466, guid: 9f9114f3f3f8e574ab530d4728413769,
+    type: 3}
+  m_PrefabInstance: {fileID: 1226666714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64136754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f55de3a26fc7c4fbd92c09dbc7b253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &66133378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +1007,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _popUpController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 475805813}
     - target: {fileID: 2840490890419130598, guid: 6f9564fa3b30adf4eb01f3109a0377c8,
         type: 3}
       propertyPath: _speed
@@ -1021,6 +1033,11 @@ PrefabInstance:
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 2003817805}
+    - target: {fileID: 2840490890419130598, guid: 6f9564fa3b30adf4eb01f3109a0377c8,
+        type: 3}
+      propertyPath: _resourceHud
+      value: 
+      objectReference: {fileID: 64136755}
     - target: {fileID: 2840490890419130593, guid: 6f9564fa3b30adf4eb01f3109a0377c8,
         type: 3}
       propertyPath: m_Speed
@@ -1382,6 +1399,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 66133378}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &475805813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3464407478341096176, guid: 66a18e8dd9618b340b854560d2bb621e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1305705202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be5c7bbbc8dce34ca15b5c1e5ab12a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &521733947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,6 +2522,11 @@ PrefabInstance:
       propertyPath: _woodAmountText
       value: 
       objectReference: {fileID: 1441372314}
+    - target: {fileID: 5956082422695961466, guid: 9f9114f3f3f8e574ab530d4728413769,
+        type: 3}
+      propertyPath: _woodAmount
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9114f3f3f8e574ab530d4728413769, type: 3}
 --- !u!1001 &1305705202
@@ -2652,6 +2686,11 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1437943019}
+    - target: {fileID: 3464407478341096176, guid: 66a18e8dd9618b340b854560d2bb621e,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 334262043}
     - target: {fileID: 3464407478779533042, guid: 66a18e8dd9618b340b854560d2bb621e,
         type: 3}
       propertyPath: m_LocalRotation.x

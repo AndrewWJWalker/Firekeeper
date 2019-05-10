@@ -18,12 +18,17 @@ public class Health : MonoBehaviour
     {
         maxHealth = _healthPoints;
 
+
+        UpdateHealthBar();
+    }
+
+    void Awake()
+    {
         healthBar = Instantiate(_healthBarPrefab, _canvas.transform);
         SetHealthBarPosition();
 
 
         healthSlider = healthBar.GetComponent<Slider>();
-        UpdateHealthBar();
     }
 
     private void Update()
