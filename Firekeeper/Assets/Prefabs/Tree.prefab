@@ -123,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edd7d086346b2f4ea67144a2a7ba538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceData: {fileID: 0}
   _resourceHudPrefab: {fileID: 0}
 --- !u!54 &166858501281488184
 Rigidbody:
@@ -149,7 +148,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457972319999250659}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.05592647, y: 0.06637665, z: 0.03456333}

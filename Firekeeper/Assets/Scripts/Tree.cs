@@ -74,6 +74,6 @@ public class Tree : MonoBehaviour, IPointerClickHandler
         // pass the resource, resource type, the amount and this game object references to the player so you can disable them when we want
         //gameObject.GetComponentInParent<Player>().
 
-        //_resource.GainResourcesFromHarvest(ResourceType.Wood, _resourceAmountHarvest, this.gameObject);
+        _resource.GainResourcesFromHarvest(ResourceType.Wood, _resourceAmountHarvest, this.gameObject);
     }
 }
