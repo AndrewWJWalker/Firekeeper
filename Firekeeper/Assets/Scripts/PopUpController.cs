@@ -81,7 +81,7 @@ public class PopUpController : MonoBehaviour
             //if (_activePopUp == null)
             //{
             ClearPopUp();
-                if (type == PopUp.PopUpType.Fix && fence.IsFenceFixable())
+                if (type == PopUp.PopUpType.Fix && _fence.IsFenceFixable())
 
                 {
                     PositionPopUp(hud, hit);
