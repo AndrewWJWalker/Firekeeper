@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class DayNightCycle : MonoBehaviour
     public float sunriseIntensity = 10;
     public float sunriseFlashTime = 0.3f;
     public Player player;
+    public int nightSurvived = 0;
+    public Text nightsSurvivedText;
 
     float sunIntensity;
     float moonIntensity;
@@ -161,6 +164,9 @@ public class DayNightCycle : MonoBehaviour
         //turn down the campfire
         StartCoroutine(TurnDownCampfire(campFireBlendTime));
         musicManager.PlayDay();
+
+        nightSurvived++;
+        nightsSurvivedText.text = ""+nightSurvived;
 
     }
 
