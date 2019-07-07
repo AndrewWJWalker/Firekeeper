@@ -57,12 +57,11 @@ public class EnemySpawner : MonoBehaviour
             GameObject newEnemy = Instantiate(enemy, this.transform);
             position.y = newEnemy.transform.position.y;
             newEnemy.transform.position = position;
-            Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-            NavMeshAgent enemyAgent = newEnemy.GetComponent<NavMeshAgent>();
-            enemyScript.agent = enemyAgent;
-            enemyManager.enemyScripts.Add(enemyScript);
+
+
+
             enemyManager.enemies.Add(newEnemy);
-            enemyManager.agents.Add(enemyAgent);
+            enemyManager.agents.Add(newEnemy.GetComponent<NavMeshAgent>());
             yield return new WaitForEndOfFrame();
         }
     }

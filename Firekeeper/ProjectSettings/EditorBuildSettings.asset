@@ -4,11 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/FirekeeperStartScreen.unity
-    guid: 01a7ef0b5b4557a45870d90aca3d72a3
-  - enabled: 1
-    path: Assets/Scenes/Firekeeper.unity
-    guid: 43d232d54d5783142a276a31525e940f
+  m_Scenes: []
   m_configObjects: {}

@@ -5,10 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public GameObject player;
+
     public List<GameObject> enemies;
     public List<NavMeshAgent> agents;
-    public List<Enemy> enemyScripts;
     public float speed = 0.3f;
     
     public bool initialised = false;
@@ -21,16 +20,11 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         
-        for(int loop = 0; loop < agents.Count; loop++)
+        foreach(NavMeshAgent agent in agents)
         {
-            NavMeshAgent agent = agents[loop];
             if (agent != null)
             {
-                if (enemyScripts[loop].alive)
-                {
-                    // agent.velocity = (player.transform.position - agent.transform.position) * speed;
-                    agent.SetDestination(player.transform.position);
-                }
+                agent.velocity = (Vector3.zero - agent.transform.position) * speed;
             }
         }
 
@@ -38,15 +32,9 @@ public class EnemyAI : MonoBehaviour
 
     public void Exterminate()
     {
-        foreach( Enemy enemy in enemyScripts )
+        foreach( GameObject enemy in enemies )
         {
-            if (enemy != null)
-            {
-                if (enemy.alive)
-                {
-                    enemy.StartDeath();
-                }
-            }
+            Destroy(enemy);
         }
     }
 }

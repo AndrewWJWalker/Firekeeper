@@ -5,53 +5,11 @@ using UnityEngine;
 public class PopUpController : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
-    [SerializeField] private Player _player;
 
     private GameObject _activePopUp;
-    private Ray _ray;
+    private Ray ray;
 
-    private Fence _fence;
-    private Base _base;
-    private Tree _tree;
-
-    private void Update()
-    {
-        //TODO decide if this stays or not
-        if (_activePopUp != null)
-        {
-            Vector2 screenPosition = Camera.main.WorldToScreenPoint(_activePopUp.gameObject.transform.position);
-            RectTransform rect = _activePopUp.GetComponent<RectTransform>();
-            Vector2 localPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.GetComponent<RectTransform>(), screenPosition, Camera.main, out localPosition);
-            _activePopUp.gameObject.transform.localPosition = localPosition;
-        }
-
-    }
-
-    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type, Base myBase)
-    {
-        _fence = fence;
-        _base = myBase;
-
-        InitiatePopUp(hud, type);
-    }
-
-    public void InitiatePopUp(GameObject hud, Tree tree, PopUp.PopUpType type)
-    {
-        _tree = tree;
-
-        InitiatePopUp(hud, type);
-    }
-
-    public void InitiatePopUp(GameObject hud, Fence fence, PopUp.PopUpType type)
-    {
-        _fence = fence;
-        
-        InitiatePopUp(hud, type);
-    }
-
-
-    public void InitiatePopUp(GameObject hud, PopUp.PopUpType type)
+    public void InitiatePopUp(GameObject hud, Fence fence)
     {
         var popUp = hud.GetComponent<PopUp>();
 
@@ -61,7 +19,7 @@ public class PopUpController : MonoBehaviour
             return;
         }
 
-        InitiatePopUpOnMouseClick(hud, type);
+        InitiatePopUpOnMouseClick(hud, fence);
     }
 
     public void ClearPopUp()
@@ -69,62 +27,32 @@ public class PopUpController : MonoBehaviour
         Destroy(_activePopUp);
     }
 
-    private void InitiatePopUpOnMouseClick(GameObject hud, PopUp.PopUpType type)
+    private void InitiatePopUpOnMouseClick(GameObject hud, Fence fence)
     {
-        _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
-        if (Physics.Raycast(_ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
-            ClearPopUp();
-                if (type == PopUp.PopUpType.Fix && _fence.IsFenceFixable())
-                {
-                    var hasEnoughCurrency = _player.GetResourceAmount(ResourceType.Wood) >= _fence.GetFixBuildCost();
+            if (_activePopUp == null && fence.IsFenceFixable())
+            {
+                var screenSpaceCord = Camera.main.WorldToScreenPoint(hit.point);
+                var canvasRectTransform = _canvas.GetComponent<RectTransform>();
+                Vector3 SpawnPosition;
 
-                    PositionPopUp(hud, hit);
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
+                    Camera.main, out SpawnPosition);
 
-                    var popUp = _activePopUp.GetComponent<PopUp>();
+                _activePopUp = Instantiate(hud, SpawnPosition,
+                        Quaternion.identity, _canvas.transform) as GameObject;
 
-                    popUp.SetFence(_fence);
-                    popUp.SetPopUpAmount(_fence.GetFixBuildCost(), hasEnoughCurrency);
+                _activePopUp.transform.localRotation = Quaternion.identity;
 
-                }
-                else if (type == PopUp.PopUpType.Build)
-                {
-                    var hasEnoughCurrency = _player.GetResourceAmount(ResourceType.Wood) >= _base.GetFenceBuildCost();
-
-                    PositionPopUp(hud, hit);
-
-                    var popUp = _activePopUp.GetComponent<PopUp>();
-                    popUp.SetPopUpAmount(_fence.GetFixBuildCost(), hasEnoughCurrency);
-
-                    popUp.SetFence(_fence);
-                    popUp.SetBase(_base);
-                }
-                else if (type == PopUp.PopUpType.Harvest)
-                {
-                    PositionPopUp(hud, hit);
-
-                    var popUp = _activePopUp.GetComponent<PopUp>();
-
-                    popUp.SetTree(_tree);
-                }
+                var popUp = _activePopUp.GetComponent<PopUp>();
+                popUp.SetFence(fence);
+                popUp.SetPopUpAmount(fence.GetFenceFixCost());
+            }
         }
-    }
-
-    private void PositionPopUp(GameObject hud, RaycastHit hit)
-    {
-        var screenSpaceCord = Camera.main.WorldToScreenPoint(hit.point);
-        var canvasRectTransform = _canvas.GetComponent<RectTransform>();
-        Vector3 SpawnPosition;
-
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
-            Camera.main, out SpawnPosition);
-
-        _activePopUp = Instantiate(hud, SpawnPosition,
-            Quaternion.identity, _canvas.transform) as GameObject;
-
-        _activePopUp.transform.localRotation = Quaternion.identity;
     }
 } 

@@ -10,15 +10,12 @@ public class PopUp : MonoBehaviour
     {
         Fix = 1 << 0,
         Build = 1 << 1,
-        Harvest = 1 << 2
+        Collect = 1 << 2
     }
 
     [SerializeField] private PopUpType _type;
 
     private Fence _fence;
-    private Base _base;
-    private Tree _tree;
-
     private Button _button;
     private Text _text;
 
@@ -42,28 +39,9 @@ public class PopUp : MonoBehaviour
         _fence = fence;
     }
 
-    public void SetBase(Base myBase)
+    public void SetPopUpAmount(int amount)
     {
-        _base = myBase;
-    }
-
-    public void SetTree(Tree tree)
-    {
-        _tree = tree;
-    }
-
-    public void SetPopUpAmount(int amount, bool hasEnoughCurrency)
-    {
-        var text = gameObject.GetComponentInChildren<Text>();
-       text.text = amount.ToString();
-        if (hasEnoughCurrency)
-        {
-            text.color = Color.black;
-        }
-        else
-        {
-            text.color = Color.red;
-        }
+        gameObject.GetComponentInChildren<Text>().text = amount.ToString();
     }
 
     private void PopUpButtonClicked()
@@ -73,26 +51,14 @@ public class PopUp : MonoBehaviour
             case PopUpType.Fix:
                 if (_fence == null)
                 {
-                    Debug.LogError("Fence reference is missing from pop up");
+                    Debug.LogError("Fence reference is missing");
                     return;
                 }
-                _fence.PopUpButtonPressed();
+                _fence.ButtonPressed();
                 break;
             case PopUpType.Build:
-                if (_base == null)
-                {
-                    Debug.LogError("Base reference is missing from pop up");
-                    return;
-                }
-                _base.ButtonPressed();
                 break;
-            case PopUpType.Harvest:
-                if (_tree == null)
-                {
-                    Debug.LogError("Tree reference is missing from pop up");
-                    return;
-                }
-                _tree.ButtonPressed();
+            case PopUpType.Collect:
                 break;
             default:
                 Debug.LogError("Pop Up type not supported");

@@ -8,19 +8,12 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopUpController _controller;
     [SerializeField] private GameObject _popUp;
-    [SerializeField] private GameObject _base;
-    [SerializeField] private int _fenceBuildCost;
-    [SerializeField] private GameObject _fixingAndBuildingPFX;
-    [SerializeField] private float _particleDuration = 1f;
-
-    private readonly PopUp.PopUpType _popUpType = PopUp.PopUpType.Fix;
-    private GameObject _currentlyPlayingPFX;
 
     private Health _health;
     private Resource _resource;
 
     private bool _playerReady;
-    private bool _bPopUpButtonPressed;
+    private bool _buttonPressed;
 
     private void Start()
     {
@@ -33,7 +26,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
         _resource = gameObject.GetComponent<Resource>();
 
-        if (_resource == null)
+        if (_health == null)
         {
             Debug.LogError("Attach Resource script");
         }
@@ -41,9 +34,10 @@ public class Fence : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _bPopUpButtonPressed = false;
+        _buttonPressed = false;
        
-        _controller.InitiatePopUp(_popUp, this, _popUpType);  
+
+        _controller.InitiatePopUp(_popUp, this);  
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -52,7 +46,7 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         {
             _playerReady = true;
 
-            if (_bPopUpButtonPressed)
+            if (_buttonPressed)
             {
                 FixFence();
             }
@@ -67,49 +61,40 @@ public class Fence : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void PopUpButtonPressed()
+    public void ButtonPressed()
     {
-        _bPopUpButtonPressed = true;
+        _buttonPressed = true;
 
         if (_playerReady)
         {
-            _bPopUpButtonPressed = false;
             FixFence();
         }
     }
 
     public bool IsFenceFixable()
     {
-        return _health.IsDamaged();
-    }
-
-    public int GetFixBuildCost()
-    {
-        return _fenceBuildCost;
-    }
-
-    public void OpenBase()
-    {
-        _base.SetActive(true);
+        return (_health.maxHealth > _health.GetCurrentHealthPoints());
     }
 
     private void FixFence()
     {
-        _resource.resourceCost = _fenceBuildCost;
 
-        if (_resource.PayResourcesForFix(ResourceType.Wood))
-        {
-            _controller.ClearPopUp();
-            _currentlyPlayingPFX = Instantiate(_fixingAndBuildingPFX, transform.position, Quaternion.identity);
+        var resourceCost = GetFenceFixCost();
 
-            StartCoroutine(PlayFixAndBuildAnimation());
-        }
+        _resource.resourceCost = resourceCost;
+
+        _resource.PayResources(ResourceType.Wood, this);
     }
 
-    private IEnumerator PlayFixAndBuildAnimation()
+    public int GetFenceFixCost()
     {
-        yield return new WaitForSeconds(_particleDuration);
+        var resourceCost = _health.maxHealth - _health.GetCurrentHealthPoints();
+        return resourceCost *= 5;
+    }
+
+    public void RestoreFenceHealth()
+    {
         _health.RestoreHealth();
-        Destroy(_currentlyPlayingPFX);
+        _controller.ClearPopUp();
     }
 }
